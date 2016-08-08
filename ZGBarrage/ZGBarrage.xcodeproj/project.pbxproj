@@ -1,0 +1,579 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF2C5EE81D5865E300049AD7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EE71D5865E300049AD7 /* main.m */; };
+		EF2C5EEB1D5865E300049AD7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EEA1D5865E300049AD7 /* AppDelegate.m */; };
+		EF2C5EEE1D5865E300049AD7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EED1D5865E300049AD7 /* ViewController.m */; };
+		EF2C5EF11D5865E300049AD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF2C5EEF1D5865E300049AD7 /* Main.storyboard */; };
+		EF2C5EF31D5865E300049AD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF2C5EF21D5865E300049AD7 /* Assets.xcassets */; };
+		EF2C5EF61D5865E300049AD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF2C5EF41D5865E300049AD7 /* LaunchScreen.storyboard */; };
+		EF2C5F011D5865E300049AD7 /* ZGBarrageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F001D5865E300049AD7 /* ZGBarrageTests.m */; };
+		EF2C5F0C1D5865E300049AD7 /* ZGBarrageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F0B1D5865E300049AD7 /* ZGBarrageUITests.m */; };
+		EF2C5F1F1D586FE600049AD7 /* ZGBarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F1E1D586FE600049AD7 /* ZGBarrageView.m */; };
+		EF2C5F221D58701900049AD7 /* ZGBarrageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F211D58701900049AD7 /* ZGBarrageLayout.m */; };
+		EF2C5F281D58715400049AD7 /* ZGBarrageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F271D58715400049AD7 /* ZGBarrageCell.m */; };
+		EF2C5F2B1D58861000049AD7 /* ZGBarrageItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F2A1D58861000049AD7 /* ZGBarrageItemModel.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF2C5EFD1D5865E300049AD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF2C5EDB1D5865E200049AD7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF2C5EE21D5865E200049AD7;
+			remoteInfo = ZGBarrage;
+		};
+		EF2C5F081D5865E300049AD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF2C5EDB1D5865E200049AD7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF2C5EE21D5865E200049AD7;
+			remoteInfo = ZGBarrage;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EF2C5EE31D5865E200049AD7 /* ZGBarrage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZGBarrage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF2C5EE71D5865E300049AD7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EF2C5EE91D5865E300049AD7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EF2C5EEA1D5865E300049AD7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EF2C5EEC1D5865E300049AD7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EF2C5EED1D5865E300049AD7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EF2C5EF01D5865E300049AD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EF2C5EF21D5865E300049AD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF2C5EF51D5865E300049AD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EF2C5EF71D5865E300049AD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF2C5EFC1D5865E300049AD7 /* ZGBarrageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZGBarrageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF2C5F001D5865E300049AD7 /* ZGBarrageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageTests.m; sourceTree = "<group>"; };
+		EF2C5F021D5865E300049AD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF2C5F071D5865E300049AD7 /* ZGBarrageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZGBarrageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF2C5F0B1D5865E300049AD7 /* ZGBarrageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageUITests.m; sourceTree = "<group>"; };
+		EF2C5F0D1D5865E300049AD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF2C5F1D1D586FE600049AD7 /* ZGBarrageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageView.h; sourceTree = "<group>"; };
+		EF2C5F1E1D586FE600049AD7 /* ZGBarrageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageView.m; sourceTree = "<group>"; };
+		EF2C5F201D58701900049AD7 /* ZGBarrageLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageLayout.h; sourceTree = "<group>"; };
+		EF2C5F211D58701900049AD7 /* ZGBarrageLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageLayout.m; sourceTree = "<group>"; };
+		EF2C5F231D58704700049AD7 /* ZGBarrageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageDataSource.h; sourceTree = "<group>"; };
+		EF2C5F261D58715400049AD7 /* ZGBarrageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageCell.h; sourceTree = "<group>"; };
+		EF2C5F271D58715400049AD7 /* ZGBarrageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageCell.m; sourceTree = "<group>"; };
+		EF2C5F291D58861000049AD7 /* ZGBarrageItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageItemModel.h; sourceTree = "<group>"; };
+		EF2C5F2A1D58861000049AD7 /* ZGBarrageItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageItemModel.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF2C5EE01D5865E200049AD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF2C5EF91D5865E300049AD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF2C5F041D5865E300049AD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF2C5EDA1D5865E200049AD7 = {
+			isa = PBXGroup;
+			children = (
+				EF2C5EE51D5865E300049AD7 /* ZGBarrage */,
+				EF2C5EFF1D5865E300049AD7 /* ZGBarrageTests */,
+				EF2C5F0A1D5865E300049AD7 /* ZGBarrageUITests */,
+				EF2C5EE41D5865E200049AD7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF2C5EE41D5865E200049AD7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF2C5EE31D5865E200049AD7 /* ZGBarrage.app */,
+				EF2C5EFC1D5865E300049AD7 /* ZGBarrageTests.xctest */,
+				EF2C5F071D5865E300049AD7 /* ZGBarrageUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF2C5EE51D5865E300049AD7 /* ZGBarrage */ = {
+			isa = PBXGroup;
+			children = (
+				EF2C5F191D58665800049AD7 /* ZGBarrage */,
+				EF2C5EE91D5865E300049AD7 /* AppDelegate.h */,
+				EF2C5EEA1D5865E300049AD7 /* AppDelegate.m */,
+				EF2C5EEC1D5865E300049AD7 /* ViewController.h */,
+				EF2C5EED1D5865E300049AD7 /* ViewController.m */,
+				EF2C5EEF1D5865E300049AD7 /* Main.storyboard */,
+				EF2C5EF21D5865E300049AD7 /* Assets.xcassets */,
+				EF2C5EF41D5865E300049AD7 /* LaunchScreen.storyboard */,
+				EF2C5EF71D5865E300049AD7 /* Info.plist */,
+				EF2C5EE61D5865E300049AD7 /* Supporting Files */,
+			);
+			path = ZGBarrage;
+			sourceTree = "<group>";
+		};
+		EF2C5EE61D5865E300049AD7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF2C5EE71D5865E300049AD7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF2C5EFF1D5865E300049AD7 /* ZGBarrageTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF2C5F001D5865E300049AD7 /* ZGBarrageTests.m */,
+				EF2C5F021D5865E300049AD7 /* Info.plist */,
+			);
+			path = ZGBarrageTests;
+			sourceTree = "<group>";
+		};
+		EF2C5F0A1D5865E300049AD7 /* ZGBarrageUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EF2C5F0B1D5865E300049AD7 /* ZGBarrageUITests.m */,
+				EF2C5F0D1D5865E300049AD7 /* Info.plist */,
+			);
+			path = ZGBarrageUITests;
+			sourceTree = "<group>";
+		};
+		EF2C5F191D58665800049AD7 /* ZGBarrage */ = {
+			isa = PBXGroup;
+			children = (
+				EF2C5F1A1D58665800049AD7 /* Controller */,
+				EF2C5F1B1D58665800049AD7 /* Model */,
+				EF2C5F1C1D58665800049AD7 /* View */,
+			);
+			path = ZGBarrage;
+			sourceTree = "<group>";
+		};
+		EF2C5F1A1D58665800049AD7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EF2C5F1B1D58665800049AD7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EF2C5F201D58701900049AD7 /* ZGBarrageLayout.h */,
+				EF2C5F211D58701900049AD7 /* ZGBarrageLayout.m */,
+				EF2C5F231D58704700049AD7 /* ZGBarrageDataSource.h */,
+				EF2C5F291D58861000049AD7 /* ZGBarrageItemModel.h */,
+				EF2C5F2A1D58861000049AD7 /* ZGBarrageItemModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EF2C5F1C1D58665800049AD7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EF2C5F1D1D586FE600049AD7 /* ZGBarrageView.h */,
+				EF2C5F1E1D586FE600049AD7 /* ZGBarrageView.m */,
+				EF2C5F261D58715400049AD7 /* ZGBarrageCell.h */,
+				EF2C5F271D58715400049AD7 /* ZGBarrageCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF2C5EE21D5865E200049AD7 /* ZGBarrage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF2C5F101D5865E300049AD7 /* Build configuration list for PBXNativeTarget "ZGBarrage" */;
+			buildPhases = (
+				EF2C5EDF1D5865E200049AD7 /* Sources */,
+				EF2C5EE01D5865E200049AD7 /* Frameworks */,
+				EF2C5EE11D5865E200049AD7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZGBarrage;
+			productName = ZGBarrage;
+			productReference = EF2C5EE31D5865E200049AD7 /* ZGBarrage.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF2C5EFB1D5865E300049AD7 /* ZGBarrageTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF2C5F131D5865E300049AD7 /* Build configuration list for PBXNativeTarget "ZGBarrageTests" */;
+			buildPhases = (
+				EF2C5EF81D5865E300049AD7 /* Sources */,
+				EF2C5EF91D5865E300049AD7 /* Frameworks */,
+				EF2C5EFA1D5865E300049AD7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF2C5EFE1D5865E300049AD7 /* PBXTargetDependency */,
+			);
+			name = ZGBarrageTests;
+			productName = ZGBarrageTests;
+			productReference = EF2C5EFC1D5865E300049AD7 /* ZGBarrageTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EF2C5F061D5865E300049AD7 /* ZGBarrageUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF2C5F161D5865E300049AD7 /* Build configuration list for PBXNativeTarget "ZGBarrageUITests" */;
+			buildPhases = (
+				EF2C5F031D5865E300049AD7 /* Sources */,
+				EF2C5F041D5865E300049AD7 /* Frameworks */,
+				EF2C5F051D5865E300049AD7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF2C5F091D5865E300049AD7 /* PBXTargetDependency */,
+			);
+			name = ZGBarrageUITests;
+			productName = ZGBarrageUITests;
+			productReference = EF2C5F071D5865E300049AD7 /* ZGBarrageUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF2C5EDB1D5865E200049AD7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Zong;
+				TargetAttributes = {
+					EF2C5EE21D5865E200049AD7 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					EF2C5EFB1D5865E300049AD7 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = EF2C5EE21D5865E200049AD7;
+					};
+					EF2C5F061D5865E300049AD7 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = EF2C5EE21D5865E200049AD7;
+					};
+				};
+			};
+			buildConfigurationList = EF2C5EDE1D5865E200049AD7 /* Build configuration list for PBXProject "ZGBarrage" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EF2C5EDA1D5865E200049AD7;
+			productRefGroup = EF2C5EE41D5865E200049AD7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF2C5EE21D5865E200049AD7 /* ZGBarrage */,
+				EF2C5EFB1D5865E300049AD7 /* ZGBarrageTests */,
+				EF2C5F061D5865E300049AD7 /* ZGBarrageUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF2C5EE11D5865E200049AD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF2C5EF61D5865E300049AD7 /* LaunchScreen.storyboard in Resources */,
+				EF2C5EF31D5865E300049AD7 /* Assets.xcassets in Resources */,
+				EF2C5EF11D5865E300049AD7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF2C5EFA1D5865E300049AD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF2C5F051D5865E300049AD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF2C5EDF1D5865E200049AD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF2C5F2B1D58861000049AD7 /* ZGBarrageItemModel.m in Sources */,
+				EF2C5EEE1D5865E300049AD7 /* ViewController.m in Sources */,
+				EF2C5F1F1D586FE600049AD7 /* ZGBarrageView.m in Sources */,
+				EF2C5EEB1D5865E300049AD7 /* AppDelegate.m in Sources */,
+				EF2C5F281D58715400049AD7 /* ZGBarrageCell.m in Sources */,
+				EF2C5F221D58701900049AD7 /* ZGBarrageLayout.m in Sources */,
+				EF2C5EE81D5865E300049AD7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF2C5EF81D5865E300049AD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF2C5F011D5865E300049AD7 /* ZGBarrageTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF2C5F031D5865E300049AD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF2C5F0C1D5865E300049AD7 /* ZGBarrageUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF2C5EFE1D5865E300049AD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF2C5EE21D5865E200049AD7 /* ZGBarrage */;
+			targetProxy = EF2C5EFD1D5865E300049AD7 /* PBXContainerItemProxy */;
+		};
+		EF2C5F091D5865E300049AD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF2C5EE21D5865E200049AD7 /* ZGBarrage */;
+			targetProxy = EF2C5F081D5865E300049AD7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EF2C5EEF1D5865E300049AD7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF2C5EF01D5865E300049AD7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EF2C5EF41D5865E300049AD7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF2C5EF51D5865E300049AD7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EF2C5F0E1D5865E300049AD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF2C5F0F1D5865E300049AD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF2C5F111D5865E300049AD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ZGBarrage/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGBarrage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EF2C5F121D5865E300049AD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ZGBarrage/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGBarrage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EF2C5F141D5865E300049AD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZGBarrageTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGBarrageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZGBarrage.app/ZGBarrage";
+			};
+			name = Debug;
+		};
+		EF2C5F151D5865E300049AD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZGBarrageTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGBarrageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZGBarrage.app/ZGBarrage";
+			};
+			name = Release;
+		};
+		EF2C5F171D5865E300049AD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ZGBarrageUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGBarrageUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZGBarrage;
+			};
+			name = Debug;
+		};
+		EF2C5F181D5865E300049AD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ZGBarrageUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGBarrageUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZGBarrage;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF2C5EDE1D5865E200049AD7 /* Build configuration list for PBXProject "ZGBarrage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF2C5F0E1D5865E300049AD7 /* Debug */,
+				EF2C5F0F1D5865E300049AD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF2C5F101D5865E300049AD7 /* Build configuration list for PBXNativeTarget "ZGBarrage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF2C5F111D5865E300049AD7 /* Debug */,
+				EF2C5F121D5865E300049AD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EF2C5F131D5865E300049AD7 /* Build configuration list for PBXNativeTarget "ZGBarrageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF2C5F141D5865E300049AD7 /* Debug */,
+				EF2C5F151D5865E300049AD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EF2C5F161D5865E300049AD7 /* Build configuration list for PBXNativeTarget "ZGBarrageUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF2C5F171D5865E300049AD7 /* Debug */,
+				EF2C5F181D5865E300049AD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF2C5EDB1D5865E200049AD7 /* Project object */;
+}
