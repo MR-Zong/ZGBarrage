@@ -9,22 +9,31 @@
 #import <UIKit/UIKit.h>
 #import "ZGBarrageDataSource.h"
 
+@class ZGMagazine;
+
 @class ZGBarrageCell;
 
 @class ZGBarrageLayout;
 
+@class ZGEmitter;
+
 @interface ZGBarrageView : UIView
+
+
+@property (nonatomic, strong) ZGEmitter *emitter;
+
+
+@property (nonatomic, assign) NSInteger currentIndex;
+
+/**
+ * reload
+ */
+- (void)reloadDataWithMagazine:(ZGMagazine *)magazine;
 
 /**
  * 初始化方法
  */
 - (instancetype)initWithFrame:(CGRect)frame barrageLayout:(ZGBarrageLayout *)layout;
-
-/**
- * 给弹幕上弹匣
- * magazine:中文意思 -- 弹匣
- */
-- (void)addMagazine:(NSArray *)magazine;
 
 
 /***
@@ -33,6 +42,6 @@
 - (__kindof ZGBarrageCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
 
 
-@property (nonatomic, weak) id <ZGBarrageDataSource> dataSource;
+@property (nonatomic, strong) id <ZGBarrageViewDataSource> dataSource;
 
 @end

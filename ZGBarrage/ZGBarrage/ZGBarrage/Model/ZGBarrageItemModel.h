@@ -10,4 +10,8 @@
 
 @interface ZGBarrageItemModel : NSObject
 
+@property (nonatomic, assign) NSInteger containerIndex;
+
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
 @end

@@ -10,9 +10,15 @@
 
 @class ZGBarrageItemModel;
 
+@class ZGBarrageView;
+
 @interface ZGBarrageLayout : NSObject
 
-- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndex:(NSInteger)index;
-- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndex:(NSInteger)index model:(nullable ZGBarrageItemModel *)model;
+@property (nonatomic, weak) ZGBarrageView *barrageView;
+@property (nonatomic) NSInteger maxRows;
+
+- (void)prepareLayout;
+- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath model:(nullable ZGBarrageItemModel *)model;
 
 @end

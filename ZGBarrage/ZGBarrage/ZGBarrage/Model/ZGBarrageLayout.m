@@ -11,4 +11,19 @@
 
 @implementation ZGBarrageLayout
 
+- (void)prepareLayout
+{
+    
+}
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+}
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath model:(ZGBarrageItemModel *)model
+{
+    return [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+}
+
 @end

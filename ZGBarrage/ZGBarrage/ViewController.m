@@ -18,6 +18,7 @@
     [super viewDidLoad];
     
     UICollectionViewLayout *aa;
+    UICollectionViewFlowLayout *b;
     UICollectionView *dd;
 }
 

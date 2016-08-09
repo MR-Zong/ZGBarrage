@@ -12,14 +12,22 @@
 
 @class ZGBarrageCell;
 
-@protocol ZGBarrageDataSource <NSObject>
+@class ZGBarrageItemModel;
+
+@class ZGMagazine;
+
+@protocol ZGBarrageViewDataSource <NSObject>
 
 @required
 
 - (NSInteger)numberOfItemsWithBarrageView:(ZGBarrageView *)barrageView;
 
 
-- (ZGBarrageCell *)barrageView:(ZGBarrageView *)barrageView cellForItemAtIndex:(NSInteger)index;
+- (ZGBarrageCell *)barrageView:(ZGBarrageView *)barrageView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 
+- (void)manageMagazinesArrayWithItemModel:(ZGBarrageItemModel *)itemModel;
+
+
+- (ZGMagazine *)getMagazine;
 
 @end

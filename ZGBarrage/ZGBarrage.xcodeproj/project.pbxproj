@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF176A711D5969250060DAE6 /* ZGMagazine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF176A701D5969250060DAE6 /* ZGMagazine.m */; };
 		EF2C5EE81D5865E300049AD7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EE71D5865E300049AD7 /* main.m */; };
 		EF2C5EEB1D5865E300049AD7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EEA1D5865E300049AD7 /* AppDelegate.m */; };
 		EF2C5EEE1D5865E300049AD7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EED1D5865E300049AD7 /* ViewController.m */; };
@@ -19,6 +20,9 @@
 		EF2C5F221D58701900049AD7 /* ZGBarrageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F211D58701900049AD7 /* ZGBarrageLayout.m */; };
 		EF2C5F281D58715400049AD7 /* ZGBarrageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F271D58715400049AD7 /* ZGBarrageCell.m */; };
 		EF2C5F2B1D58861000049AD7 /* ZGBarrageItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F2A1D58861000049AD7 /* ZGBarrageItemModel.m */; };
+		EF35FBFF1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.m in Sources */ = {isa = PBXBuildFile; fileRef = EF35FBFE1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.m */; };
+		EF35FC021D59783900288C3A /* ZGBarrageFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF35FC011D59783900288C3A /* ZGBarrageFlowLayout.m */; };
+		EF7360C91D59BA4B00967D6F /* ZGEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7360C81D59BA4B00967D6F /* ZGEmitter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF176A6F1D5969250060DAE6 /* ZGMagazine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGMagazine.h; sourceTree = "<group>"; };
+		EF176A701D5969250060DAE6 /* ZGMagazine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGMagazine.m; sourceTree = "<group>"; };
 		EF2C5EE31D5865E200049AD7 /* ZGBarrage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZGBarrage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF2C5EE71D5865E300049AD7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF2C5EE91D5865E300049AD7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -64,6 +70,12 @@
 		EF2C5F271D58715400049AD7 /* ZGBarrageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageCell.m; sourceTree = "<group>"; };
 		EF2C5F291D58861000049AD7 /* ZGBarrageItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageItemModel.h; sourceTree = "<group>"; };
 		EF2C5F2A1D58861000049AD7 /* ZGBarrageItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageItemModel.m; sourceTree = "<group>"; };
+		EF35FBFD1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageViewDataSourceImplement.h; sourceTree = "<group>"; };
+		EF35FBFE1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageViewDataSourceImplement.m; sourceTree = "<group>"; };
+		EF35FC001D59783900288C3A /* ZGBarrageFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageFlowLayout.h; sourceTree = "<group>"; };
+		EF35FC011D59783900288C3A /* ZGBarrageFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageFlowLayout.m; sourceTree = "<group>"; };
+		EF7360C71D59BA4B00967D6F /* ZGEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGEmitter.h; sourceTree = "<group>"; };
+		EF7360C81D59BA4B00967D6F /* ZGEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGEmitter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +191,14 @@
 				EF2C5F231D58704700049AD7 /* ZGBarrageDataSource.h */,
 				EF2C5F291D58861000049AD7 /* ZGBarrageItemModel.h */,
 				EF2C5F2A1D58861000049AD7 /* ZGBarrageItemModel.m */,
+				EF176A6F1D5969250060DAE6 /* ZGMagazine.h */,
+				EF176A701D5969250060DAE6 /* ZGMagazine.m */,
+				EF35FBFD1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.h */,
+				EF35FBFE1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.m */,
+				EF35FC001D59783900288C3A /* ZGBarrageFlowLayout.h */,
+				EF35FC011D59783900288C3A /* ZGBarrageFlowLayout.m */,
+				EF7360C71D59BA4B00967D6F /* ZGEmitter.h */,
+				EF7360C81D59BA4B00967D6F /* ZGEmitter.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,8 +347,12 @@
 				EF2C5F2B1D58861000049AD7 /* ZGBarrageItemModel.m in Sources */,
 				EF2C5EEE1D5865E300049AD7 /* ViewController.m in Sources */,
 				EF2C5F1F1D586FE600049AD7 /* ZGBarrageView.m in Sources */,
+				EF35FC021D59783900288C3A /* ZGBarrageFlowLayout.m in Sources */,
 				EF2C5EEB1D5865E300049AD7 /* AppDelegate.m in Sources */,
+				EF7360C91D59BA4B00967D6F /* ZGEmitter.m in Sources */,
+				EF176A711D5969250060DAE6 /* ZGMagazine.m in Sources */,
 				EF2C5F281D58715400049AD7 /* ZGBarrageCell.m in Sources */,
+				EF35FBFF1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.m in Sources */,
 				EF2C5F221D58701900049AD7 /* ZGBarrageLayout.m in Sources */,
 				EF2C5EE81D5865E300049AD7 /* main.m in Sources */,
 			);
@@ -556,6 +580,7 @@
 				EF2C5F121D5865E300049AD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EF2C5F131D5865E300049AD7 /* Build configuration list for PBXNativeTarget "ZGBarrageTests" */ = {
 			isa = XCConfigurationList;
@@ -564,6 +589,7 @@
 				EF2C5F151D5865E300049AD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EF2C5F161D5865E300049AD7 /* Build configuration list for PBXNativeTarget "ZGBarrageUITests" */ = {
 			isa = XCConfigurationList;
@@ -572,6 +598,7 @@
 				EF2C5F181D5865E300049AD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

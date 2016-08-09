@@ -10,14 +10,14 @@
 #import "ZGBarrageLayout.h"
 #import "ZGBarrageItemModel.h"
 #import "ZGBarrageCell.h"
+#import "ZGMagazine.h"
+#import "ZGEmitter.h"
 
-@interface ZGBarrageView ()
-
-@property (nonatomic, strong) NSMutableArray *magazinesArray;
+@interface ZGBarrageView () <ZGBarrageCellAnimateDelegate,ZGEmitterDataSource>
 
 @property (nonatomic, strong) ZGBarrageLayout *layout;
 
-@property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic, strong) NSSet *cellCachePool;
 
 @end
 
@@ -26,31 +26,17 @@
 - (instancetype)initWithFrame:(CGRect)frame barrageLayout:(ZGBarrageLayout *)layout
 {
     if (self = [super initWithFrame:frame]) {
-        _magazinesArray = [NSMutableArray array];
         _layout = layout;
+        _layout.barrageView = self;
+        [_layout prepareLayout];
+        
+        _emitter = [[ZGEmitter alloc] init];
+        _emitter.dataSource = self;
     }
     return self;
 }
 
 
-- (void)addMagazine:(NSArray *)magazine
-{
-    // 必须上锁
-    [self.magazinesArray addObject:magazine];
-    
-    // 添加完数据，接着就是显示到屏幕
-    [self reloadDataWithMagazine:magazine];
-}
-
-- (void)removeMagazineWithIndex:(NSInteger)index
-{
-    // 必须上锁
-    [self.magazinesArray removeObjectAtIndex:index];
-    
-    if (self.magazinesArray.count == 0) {
-        self.currentIndex = 0;
-    }
-}
 
 - (ZGBarrageCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath
 {
@@ -58,26 +44,54 @@
 }
 
 
-- (void)reloadDataWithMagazine:(NSArray *)magazine
+- (void)reloadDataWithMagazine:(ZGMagazine *)magazine
 {
-    for (int i=0; i<magazine.count; i++) {
-        
-        // 1,先拿到布局信息
-        ZGBarrageItemModel *model = magazine[i];
-        UICollectionViewLayoutAttributes *layoutAttribute = [self.layout layoutAttributesForItemAtIndex:0 model:model];
-        
-        // 2,拿到cell视图
-        ZGBarrageCell *cell = [self.dataSource barrageView:self cellForItemAtIndex:i];
-        cell.frame = layoutAttribute.frame;
-        
-        // 3,addSubview,并设置布局信息
-        [self addSubview:cell];
-        
-        // 4,开始动画
-        [cell startAnimation];
-        
-    }
+
+    // 把数据交给发射器发射
+    [_emitter start];
   
+}
+
+#pragma mark - ZGBarrageCellAnimateDelegate
+- (void)animationDidStopWithCell:(ZGBarrageCell *)cell
+{
+    // 加入cell缓存池
+    [self.cellCachePool setValue:cell forKey:@""];
+    
+    // dataSource 操作
+    [self.dataSource manageMagazinesArrayWithItemModel:cell.itemModel];
+    
+    
+}
+
+#pragma mark - ZGEmitterDataSource
+- (NSInteger)getMaxRows
+{
+    return self.layout.maxRows;
+}
+
+- (ZGMagazine *)getMagazineWithEmitter:(ZGEmitter *)emitter
+{
+    return [self.dataSource getMagazine];
+}
+
+- (ZGBarrageCell *)emitter:(ZGEmitter *)emitter cellForItemAtIndexPath:(NSIndexPath *)indexPath itemModel:(ZGBarrageItemModel *)itemModel
+{
+    
+    // 1,先拿到布局信息
+    UICollectionViewLayoutAttributes *layoutAttribute = [self.layout layoutAttributesForItemAtIndexPath:indexPath model:itemModel];
+    
+    // 2,拿到cell视图
+    ZGBarrageCell *cell = [self.dataSource barrageView:self cellForItemAtIndexPath:indexPath];
+    cell.frame = layoutAttribute.frame;
+    cell.animateDelegate = self;
+    cell.animateDelegate2 = self.emitter;
+    
+    // 3,addSubview,并设置布局信息
+    [self addSubview:cell];
+    
+    return cell;
+    
 }
 
 
