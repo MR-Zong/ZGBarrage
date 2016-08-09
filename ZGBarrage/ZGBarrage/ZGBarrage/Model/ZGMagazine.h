@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ZGMagazine : NSArray
+@interface ZGMagazine : NSObject
+
+@property (nonatomic, strong) NSArray *dataArray;
 
 @property (nonatomic, assign) NSInteger leaveCount;
 

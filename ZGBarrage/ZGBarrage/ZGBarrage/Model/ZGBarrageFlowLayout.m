@@ -61,20 +61,22 @@
     self.maxRows = row;
 }
 
-
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndex:(NSInteger)index
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    // 根据index 算出 item.frame
+    // 根据indexPath，设置cell的frame
+    UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+    CGFloat attrY = self.edgeInsets.top + indexPath.section * (self.itemSize.height + self.minimumLineSpacing);
+    attr.frame = CGRectMake(self.barrageView.bounds.size.width, attrY, self.itemSize.width, self.itemSize.height);
     
-    
-    return [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    return attr;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndex:(NSInteger)index model:(ZGBarrageItemModel *)model
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath model:(ZGBarrageItemModel *)model
 {
-    return [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    return [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
 }
+
+
 
 - (CGSize)itemSizeWithModel:(ZGBarrageItemModel *)itemModel
 {

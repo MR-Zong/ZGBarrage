@@ -11,6 +11,7 @@
 #import "ZGBarrageItemModel.h"
 #import "ZGBarrageView.h"
 #import "ZGEmitter.h"
+#import "ZGBarrageCell.h"
 
 @interface ZGBarrageViewDataSourceImplement ()
 
@@ -38,9 +39,11 @@
 - (void)addMagazine:(NSArray *)magazine
 {
     // 必须上锁
-    ZGMagazine *tmpMagazine = (ZGMagazine *)magazine;
+    ZGMagazine *tmpMagazine = [[ZGMagazine alloc] init];
+    tmpMagazine.dataArray = magazine;
     tmpMagazine.leaveCount = magazine.count;
     [self.magazinesArray addObject:tmpMagazine];
+    tmpMagazine.indexInContainer = [self.magazinesArray indexOfObject:tmpMagazine];
     
     // 添加完数据，通知barrageView将数据显示到屏幕
     [self.barrageView reloadDataWithMagazine:tmpMagazine];
@@ -83,9 +86,24 @@
     return 19;
 }
 
-- (ZGBarrageCell *)barrageView:(ZGBarrageView *)barrageView cellForItemAtIndex:(NSInteger)index
+
+- (ZGBarrageCell *)barrageView:(ZGBarrageView *)barrageView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    ZGBarrageCell *cell = [barrageView dequeueReusableCellWithIdentifier:ZGBarrageCellReusableIdentifier forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[ZGBarrageCell alloc] initWithReusableIdentifier:ZGBarrageCellReusableIdentifier];
+    }
+    
+    cell.textLabel.text = @"abc";
+    cell.backgroundColor = [UIColor orangeColor];
+    return cell;
+}
+
+#pragma mark - emitter 发射完一个magazine
+- (void)emitCompleteWithMagazine:(ZGMagazine *)magazine
+{
+    // 移除发射完的magazine
+    [self removeMagazineWithIndex:magazine.indexInContainer];
 }
 
 @end

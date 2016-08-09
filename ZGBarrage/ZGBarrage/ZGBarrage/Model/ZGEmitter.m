@@ -10,6 +10,7 @@
 #import "ZGBarrageItemModel.h"
 #import "ZGBarrageCell.h"
 #import "ZGMagazine.h"
+#import "ZGBarrageViewDataSourceImplement.h"
 
 @interface ZGEmitter ()
 
@@ -42,6 +43,10 @@
         
         self.magazine = [self.dataSource getMagazineWithEmitter:self];
         
+        if (self.magazine == nil) { // 排除异常--获取新的magazine是Nil
+            return;
+        }
+
         // 开始发射
         [self emitStart];
     }
@@ -50,12 +55,12 @@
 
 - (void)emitStart
 {
-    NSInteger Count = self.maxRows < self.magazine.count ? self.maxRows : self.magazine.count;
+    NSInteger Count = self.maxRows < self.magazine.dataArray.count ? self.maxRows : self.magazine.dataArray.count;
     for (int i=0; i<Count; i++) {
         NSInteger item = 0;
         NSInteger section = i;
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
-        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:indexPath itemModel:self.magazine[item]];
+        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:indexPath itemModel:self.magazine.dataArray[item]];
         
         // 判断该section是否可以发射
         if ([[self.flagDic valueForKey:[NSString stringWithFormat:@"%zd",section]] boolValue] == YES) {
@@ -78,10 +83,10 @@
     // 判断，同行（section）的下一个，有没有超出magazine
     NSInteger item = cell.itemModel.indexPath.item;
     NSInteger section = cell.itemModel.indexPath.section;
-    if ( ( (item + 1) * self.maxRows + section) < self.magazine.count ) {
+    if ( ( (item + 1) * self.maxRows + section) < self.magazine.dataArray.count ) {
         // 没有超出magazine
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:(item+1) inSection:section];
-        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:indexPath itemModel:self.magazine[item]];
+        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:indexPath itemModel:self.magazine.dataArray[item]];
         [cell startAnimation];
         [self.flagDic setValue:@(NO) forKey:[NSString stringWithFormat:@"%zd",section]];
     }else {
@@ -89,6 +94,16 @@
         if (self.magazine.leaveCount <=0 )
         {
             // 通知dataSource，本次magazine已经发射完成，要更换magazine了
+            [self.barrageViewDataSource emitCompleteWithMagazine:self.magazine];
+            
+            // emitter 立马要获取一个新的magazine来发射
+            self.magazine = [self.dataSource getMagazineWithEmitter:self];
+            
+            if (self.magazine == nil) { // 获取新的magazine是Nil说明magazinesArray全部发射完
+                return;
+            }
+            // 对新的magazine，重新一轮发射
+            [self emitStart];
         }
     }
 }
@@ -97,6 +112,11 @@
 - (void)animation2DidStopWithCell:(ZGBarrageCell *)cell
 {
     [self.flagDic setValue:@(YES) forKey:[NSString stringWithFormat:@"%zd",cell.itemModel.indexPath.section]];
+    
+    // 此时可以算发射完一个cell了
+    // 发射一个，magezine.leaveCount 要减一
+    self.magazine.leaveCount--;
+    
     [self emitWithBarrageCell:cell];
 }
 

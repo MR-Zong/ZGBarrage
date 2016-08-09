@@ -7,7 +7,6 @@
 //
 
 #import "ZGBarrageView.h"
-#import "ZGBarrageLayout.h"
 #import "ZGBarrageItemModel.h"
 #import "ZGBarrageCell.h"
 #import "ZGMagazine.h"
@@ -17,7 +16,10 @@
 
 @property (nonatomic, strong) ZGBarrageLayout *layout;
 
-@property (nonatomic, strong) NSSet *cellCachePool;
+@property (nonatomic, strong) ZGBarrageViewDataSourceImplement *dataSource;
+
+// 循环重用cell池
+@property (nonatomic,strong) NSMutableSet* reusableCachePool;
 
 @end
 
@@ -30,24 +32,42 @@
         _layout.barrageView = self;
         [_layout prepareLayout];
         
+        _dataSource = [[ZGBarrageViewDataSourceImplement alloc] init];
+        _dataSource.barrageView = self;
+        
         _emitter = [[ZGEmitter alloc] init];
         _emitter.dataSource = self;
+        _emitter.barrageViewDataSource = _dataSource;
     }
     return self;
 }
 
-
+- (void)addDataArray:(NSArray *)dataArray
+{
+    [self.dataSource addMagazine:dataArray];
+}
 
 - (ZGBarrageCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    __block ZGBarrageCell* anyObject = nil;
+    [self.reusableCachePool enumerateObjectsUsingBlock:^(ZGBarrageCell* cell, BOOL *stop) {
+        if ([cell.identifier isEqualToString:identifier]) {
+            *stop = YES;
+            anyObject = cell;
+        }
+    }];
+    
+    if (anyObject != nil) {
+        [self.reusableCachePool removeObject:anyObject];
+    }
+    return anyObject;
+
 }
 
 
 - (void)reloadDataWithMagazine:(ZGMagazine *)magazine
 {
-
-    // 把数据交给发射器发射
+    // 发射器开始发射
     [_emitter start];
   
 }
@@ -55,8 +75,9 @@
 #pragma mark - ZGBarrageCellAnimateDelegate
 - (void)animationDidStopWithCell:(ZGBarrageCell *)cell
 {
+    // 随着动画结束，该cell已经离开屏幕!!
     // 加入cell缓存池
-    [self.cellCachePool setValue:cell forKey:@""];
+    [self.reusableCachePool setValue:cell forKey:ZGBarrageCellReusableIdentifier];
     
     // dataSource 操作
     [self.dataSource manageMagazinesArrayWithItemModel:cell.itemModel];
@@ -79,11 +100,13 @@
 {
     
     // 1,先拿到布局信息
-    UICollectionViewLayoutAttributes *layoutAttribute = [self.layout layoutAttributesForItemAtIndexPath:indexPath model:itemModel];
+    UICollectionViewLayoutAttributes *layoutAttribute = [self.layout layoutAttributesForItemAtIndexPath:indexPath];
     
     // 2,拿到cell视图
     ZGBarrageCell *cell = [self.dataSource barrageView:self cellForItemAtIndexPath:indexPath];
     cell.frame = layoutAttribute.frame;
+    NSLog(@"layoutAttribute.frame %@",NSStringFromCGRect(layoutAttribute.frame));
+    cell.textLabel.frame = cell.bounds;
     cell.animateDelegate = self;
     cell.animateDelegate2 = self.emitter;
     

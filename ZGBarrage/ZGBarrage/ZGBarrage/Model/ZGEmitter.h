@@ -13,6 +13,8 @@
 
 @class ZGMagazine;
 
+@class ZGBarrageViewDataSourceImplement;
+
 @protocol ZGEmitterDataSource <NSObject>
 
 - (ZGBarrageCell *)emitter:(ZGEmitter *)emitter cellForItemAtIndexPath:(NSIndexPath *)indexPath itemModel:(ZGBarrageItemModel *)itemModel;
@@ -27,7 +29,7 @@
 - (void)emitWithBarrageCell:(ZGBarrageCell *)cell;
 
 
-
+@property (nonatomic, weak) ZGBarrageViewDataSourceImplement *barrageViewDataSource;
 @property (nonatomic, weak) id <ZGEmitterDataSource> dataSource;
 
 @end

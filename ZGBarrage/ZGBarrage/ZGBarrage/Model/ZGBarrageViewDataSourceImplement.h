@@ -26,4 +26,6 @@
  */
 - (void)addMagazine:(NSArray *)magazine;
 
+- (void)emitCompleteWithMagazine:(ZGMagazine *)magazine;
+
 @end

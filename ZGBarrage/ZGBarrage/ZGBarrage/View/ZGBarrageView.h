@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZGBarrageDataSource.h"
+#import "ZGBarrageViewDataSourceImplement.h"
+#import "ZGBarrageFlowLayout.h"
+#import "ZGBarrageItemModel.h"
 
 @class ZGMagazine;
 
@@ -26,6 +28,11 @@
 @property (nonatomic, assign) NSInteger currentIndex;
 
 /**
+ * 设置，并显示弹幕模型数组，注意数组元素类型一定要ZGBarrageItemModel
+ */
+- (void)addDataArray:(NSArray *)dataArray;
+
+/**
  * reload
  */
 - (void)reloadDataWithMagazine:(ZGMagazine *)magazine;
@@ -42,6 +49,5 @@
 - (__kindof ZGBarrageCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
 
 
-@property (nonatomic, strong) id <ZGBarrageViewDataSource> dataSource;
 
 @end

@@ -25,10 +25,16 @@
 @end
 
 
+extern NSString * const ZGBarrageCellReusableIdentifier;
 
 @interface ZGBarrageCell : UIView
 
+@property (nonatomic, strong) UILabel *textLabel;
 @property (nonatomic, strong) ZGBarrageItemModel *itemModel;
+
+@property (nonatomic, readonly, copy) NSString* identifier;
+- (instancetype)initWithReusableIdentifier:(NSString*)identifer;
+
 
 - (void)startAnimation;
 
