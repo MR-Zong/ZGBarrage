@@ -14,5 +14,7 @@
 
 @property (nonatomic, assign) NSInteger leaveCount;
 
+@property (nonatomic, assign) NSInteger firstStageOfLeaveCount;
+
 @property (nonatomic, assign) NSInteger indexInContainer;
 @end

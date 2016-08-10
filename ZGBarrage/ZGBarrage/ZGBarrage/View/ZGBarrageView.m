@@ -7,14 +7,11 @@
 //
 
 #import "ZGBarrageView.h"
-#import "ZGBarrageItemModel.h"
 #import "ZGBarrageCell.h"
 #import "ZGMagazine.h"
 #import "ZGEmitter.h"
 
 @interface ZGBarrageView () <ZGBarrageCellAnimateDelegate,ZGEmitterDataSource>
-
-@property (nonatomic, strong) ZGBarrageLayout *layout;
 
 @property (nonatomic, strong) ZGBarrageViewDataSourceImplement *dataSource;
 
@@ -91,24 +88,28 @@
     return self.layout.maxRows;
 }
 
-- (ZGMagazine *)getMagazineWithEmitter:(ZGEmitter *)emitter
+- (ZGMagazine *)getMagazineWithIndex:(NSInteger)index
 {
-    return [self.dataSource getMagazine];
+    return [self.dataSource getMagazineWithIndex:index];
 }
 
 - (ZGBarrageCell *)emitter:(ZGEmitter *)emitter cellForItemAtIndexPath:(NSIndexPath *)indexPath itemModel:(ZGBarrageItemModel *)itemModel
 {
     
+//    NSLog(@"item %zd - section %zd",indexPath.item,indexPath.section);
     // 1,先拿到布局信息
     UICollectionViewLayoutAttributes *layoutAttribute = [self.layout layoutAttributesForItemAtIndexPath:indexPath];
     
     // 2,拿到cell视图
     ZGBarrageCell *cell = [self.dataSource barrageView:self cellForItemAtIndexPath:indexPath];
     cell.frame = layoutAttribute.frame;
-    NSLog(@"layoutAttribute.frame %@",NSStringFromCGRect(layoutAttribute.frame));
+//    NSLog(@"layoutAttribute.frame %@",NSStringFromCGRect(layoutAttribute.frame));
     cell.textLabel.frame = cell.bounds;
     cell.animateDelegate = self;
     cell.animateDelegate2 = self.emitter;
+    cell.minimumInteritemSpacing = ((ZGBarrageFlowLayout *)self.layout).minimumInteritemSpacing;
+    cell.itemModel = itemModel;
+    cell.textLabel.text = itemModel.text;
     
     // 3,addSubview,并设置布局信息
     [self addSubview:cell];

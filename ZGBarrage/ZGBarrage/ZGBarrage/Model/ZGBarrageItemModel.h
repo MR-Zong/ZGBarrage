@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZGMagazine.h"
 
 @interface ZGBarrageItemModel : NSObject
 
-@property (nonatomic, assign) NSInteger containerIndex;
+@property (nonatomic, assign) NSInteger magazineIndexInContainer;
 
 @property (nonatomic, strong) NSIndexPath *indexPath;
+
+@property (nonatomic, strong) NSString *text;
 
 @end

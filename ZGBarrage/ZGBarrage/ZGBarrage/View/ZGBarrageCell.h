@@ -29,6 +29,7 @@ extern NSString * const ZGBarrageCellReusableIdentifier;
 
 @interface ZGBarrageCell : UIView
 
+@property (nonatomic) CGFloat minimumInteritemSpacing;
 @property (nonatomic, strong) UILabel *textLabel;
 @property (nonatomic, strong) ZGBarrageItemModel *itemModel;
 

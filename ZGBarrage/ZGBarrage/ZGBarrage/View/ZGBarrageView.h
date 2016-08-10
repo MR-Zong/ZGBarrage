@@ -15,8 +15,6 @@
 
 @class ZGBarrageCell;
 
-@class ZGBarrageLayout;
-
 @class ZGEmitter;
 
 @interface ZGBarrageView : UIView
@@ -26,6 +24,7 @@
 
 
 @property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic, strong) ZGBarrageLayout *layout;
 
 /**
  * 设置，并显示弹幕模型数组，注意数组元素类型一定要ZGBarrageItemModel

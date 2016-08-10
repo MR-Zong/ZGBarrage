@@ -21,6 +21,9 @@
 {
     if (self = [super init]) {
         self.itemSize = CGSizeMake(120, 44);
+        self.minimumLineSpacing = 10;
+        self.edgeInsets = UIEdgeInsetsMake(10, 0, 0, 0);
+        self.minimumInteritemSpacing = 10;
     }
     return self;
 }

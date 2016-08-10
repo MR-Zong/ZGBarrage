@@ -41,7 +41,7 @@
         }
         
         
-        self.magazine = [self.dataSource getMagazineWithEmitter:self];
+        self.magazine = [self.dataSource getMagazineWithIndex:0];
         
         if (self.magazine == nil) { // 排除异常--获取新的magazine是Nil
             return;
@@ -60,8 +60,12 @@
         NSInteger item = 0;
         NSInteger section = i;
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
-        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:indexPath itemModel:self.magazine.dataArray[item]];
-        
+        ZGBarrageItemModel *itemModel = self.magazine.dataArray[section];
+        itemModel.indexPath = indexPath;
+//        NSLog(@"item %zd - section %zd",itemModel.indexPath.item,itemModel.indexPath.section);
+        // 其实可以不用赋值的，因为永远都是第一个magazine
+        itemModel.magazineIndexInContainer = self.magazine.indexInContainer;
+        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:indexPath itemModel:itemModel];
         // 判断该section是否可以发射
         if ([[self.flagDic valueForKey:[NSString stringWithFormat:@"%zd",section]] boolValue] == YES) {
             [cell startAnimation];
@@ -86,18 +90,23 @@
     if ( ( (item + 1) * self.maxRows + section) < self.magazine.dataArray.count ) {
         // 没有超出magazine
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:(item+1) inSection:section];
-        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:indexPath itemModel:self.magazine.dataArray[item]];
+        ZGBarrageItemModel *itemModel = self.magazine.dataArray[( (item + 1) * self.maxRows + section)];
+        itemModel.indexPath = indexPath;
+//         NSLog(@"item %zd - section %zd",itemModel.indexPath.item,itemModel.indexPath.section);
+        // 其实可以不用赋值的，因为永远都是第一个magazine
+        itemModel.magazineIndexInContainer = self.magazine.indexInContainer;
+        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:indexPath itemModel:itemModel];
         [cell startAnimation];
         [self.flagDic setValue:@(NO) forKey:[NSString stringWithFormat:@"%zd",section]];
     }else {
         // 判断是否magazine全部发射完成
-        if (self.magazine.leaveCount <=0 )
+        if (self.magazine.firstStageOfLeaveCount <=0 )
         {
             // 通知dataSource，本次magazine已经发射完成，要更换magazine了
             [self.barrageViewDataSource emitCompleteWithMagazine:self.magazine];
             
             // emitter 立马要获取一个新的magazine来发射
-            self.magazine = [self.dataSource getMagazineWithEmitter:self];
+            self.magazine = [self.dataSource getMagazineWithIndex:(self.magazine.indexInContainer + 1)];
             
             if (self.magazine == nil) { // 获取新的magazine是Nil说明magazinesArray全部发射完
                 return;
@@ -113,9 +122,9 @@
 {
     [self.flagDic setValue:@(YES) forKey:[NSString stringWithFormat:@"%zd",cell.itemModel.indexPath.section]];
     
-    // 此时可以算发射完一个cell了
-    // 发射一个，magezine.leaveCount 要减一
-    self.magazine.leaveCount--;
+    // 此时，第一阶段发射完一个cell了
+    // 发射一个，magezine.firstStageOfLeaveCount 要减一
+    self.magazine.firstStageOfLeaveCount--;
     
     [self emitWithBarrageCell:cell];
 }

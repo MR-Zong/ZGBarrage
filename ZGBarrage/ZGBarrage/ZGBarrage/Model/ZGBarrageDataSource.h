@@ -28,6 +28,6 @@
 - (void)manageMagazinesArrayWithItemModel:(ZGBarrageItemModel *)itemModel;
 
 
-- (ZGMagazine *)getMagazine;
+- (ZGMagazine *)getMagazineWithIndex:(NSInteger)index;
 
 @end

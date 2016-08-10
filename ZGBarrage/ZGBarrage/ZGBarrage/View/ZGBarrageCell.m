@@ -7,6 +7,7 @@
 //
 
 #import "ZGBarrageCell.h"
+#import "ZGBarrageView.h"
 
 #define Velocity 30.0
 
@@ -27,20 +28,25 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
     self.textLabel = [[UILabel alloc] init];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.font = [UIFont systemFontOfSize:18];
-    
+//    self.textLabel.hidden = YES;
     [self addSubview:self.textLabel];
+    
 }
 
 - (void)startAnimation
 {
     CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
 
-    CGFloat relativeValue =  -(8 + self.bounds.size.width);
+    CGFloat relativeValue =  -(self.minimumInteritemSpacing + self.bounds.size.width);
     baseAnimation.toValue =  @(relativeValue);
     baseAnimation.duration = fabs(relativeValue) / Velocity;
     baseAnimation.delegate = self;
-    NSLog(@"targetValue %f",relativeValue);
-    NSLog(@"duration %f",baseAnimation.duration);
+    //动画结束时候状态，我动画结束在哪里就停在哪里
+//    baseAnimation.removedOnCompletion = NO;
+//    baseAnimation.fillMode=kCAFillModeForwards;
+//    baseAnimation.additive = YES;
+//    NSLog(@"targetValue %f",relativeValue);
+//    NSLog(@"duration %f",baseAnimation.duration);
     
     [self.layer addAnimation:baseAnimation forKey:@"firstAnimation"];
 }
@@ -50,9 +56,8 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
     if (flag == YES) {
         
         CABasicAnimation *baseAnimationFirst = (CABasicAnimation *)anim;
-        NSLog(@"toValue %@",baseAnimationFirst.toValue);
         
-        CGFloat fromValue = -(8 + self.bounds.size.width);
+        CGFloat fromValue = -(self.minimumInteritemSpacing + self.bounds.size.width);
         if (((NSNumber *)baseAnimationFirst.toValue).doubleValue >=  fromValue ) { // 第一阶段动画结束
             
             // 通知代理
@@ -63,11 +68,14 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
             // 可以开始第二阶段动画
             CABasicAnimation *baseAnimationSecond = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
             
-            CGFloat relativeValue = -self.superview.bounds.size.width;
+            CGFloat relativeValue = -(self.superview.bounds.size.width + self.bounds.size.width);
             baseAnimationSecond.fromValue = @(fromValue);
             baseAnimationSecond.toValue = @(relativeValue);
-            baseAnimationSecond.duration = fabs(relativeValue) / Velocity;
-            
+            baseAnimationSecond.duration = fabs(relativeValue) / (Velocity + 10);
+            baseAnimationSecond.delegate = self;
+//            baseAnimationSecond.removedOnCompletion = NO;
+//            baseAnimationSecond.fillMode=kCAFillModeForwards;
+//            baseAnimationSecond.additive = YES;
             
             [self.layer addAnimation:baseAnimationSecond forKey:@"secondAnimation"];
             
@@ -86,5 +94,57 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
       
     }
 }
+
+
+#pragma mark - 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+//    NSLog(@"hitTest");
+//    NSLog(@"event %@",event);
+    
+//    NSLog(@"self %@",self);
+    CALayer *layer =  self.layer.presentationLayer;
+//    NSLog(@"layer.frame %@",NSStringFromCGRect(layer.frame));
+    
+    CGPoint newPoint = [self convertPoint:point toView:self.superview];
+//    NSLog(@"newPoint %@",NSStringFromCGPoint(newPoint));
+    
+    CGPoint selfPoint = [self convertPoint:newPoint toFrame:layer.frame];
+//    NSLog(@"selfPoint %@",NSStringFromCGPoint(selfPoint));
+    static BOOL flag = YES;
+    if (flag == YES) {
+//        flag = NO;
+        if ([self pointInside:selfPoint frame:layer.frame] == YES ) {
+//            NSLog(@"你点到我啦！哼~");
+            NSLog(@"text %@",self.itemModel.text);
+        }
+    }
+    
+    
+    
+   return [super hitTest:point withEvent:event];
+}
+
+- (BOOL)pointInside:(CGPoint)point frame:(CGRect)frame
+{
+    if (point.x >= 0 && point.x <= frame.size.width) {
+        if (point.y >= 0 && point.y <= frame.size.height) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (CGPoint)convertPoint:(CGPoint)point toFrame:(CGRect)frame
+{
+    CGFloat newX =  point.x - fabs(frame.origin.x);
+    CGFloat newY =  point.y - fabs(frame.origin.y);
+    CGPoint newPoint = CGPointMake(newX, newY);
+    
+    return newPoint;
+}
+
+
 
 @end

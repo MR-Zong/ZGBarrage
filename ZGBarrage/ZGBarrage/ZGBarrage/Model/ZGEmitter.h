@@ -18,7 +18,7 @@
 @protocol ZGEmitterDataSource <NSObject>
 
 - (ZGBarrageCell *)emitter:(ZGEmitter *)emitter cellForItemAtIndexPath:(NSIndexPath *)indexPath itemModel:(ZGBarrageItemModel *)itemModel;
-- (ZGMagazine *)getMagazineWithEmitter:(ZGEmitter *)emitter;
+- (ZGMagazine *)getMagazineWithIndex:(NSInteger)index;
 - (NSInteger)getMaxRows;
 
 @end

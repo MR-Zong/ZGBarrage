@@ -22,6 +22,7 @@
 		EF2C5F2B1D58861000049AD7 /* ZGBarrageItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5F2A1D58861000049AD7 /* ZGBarrageItemModel.m */; };
 		EF35FBFF1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.m in Sources */ = {isa = PBXBuildFile; fileRef = EF35FBFE1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.m */; };
 		EF35FC021D59783900288C3A /* ZGBarrageFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF35FC011D59783900288C3A /* ZGBarrageFlowLayout.m */; };
+		EF4708CA1D5B331E00A5DE64 /* 弹幕效果展示.gif in Resources */ = {isa = PBXBuildFile; fileRef = EF4708C91D5B331E00A5DE64 /* 弹幕效果展示.gif */; };
 		EF7360C91D59BA4B00967D6F /* ZGEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7360C81D59BA4B00967D6F /* ZGEmitter.m */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		EF35FBFE1D596D9500288C3A /* ZGBarrageViewDataSourceImplement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageViewDataSourceImplement.m; sourceTree = "<group>"; };
 		EF35FC001D59783900288C3A /* ZGBarrageFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageFlowLayout.h; sourceTree = "<group>"; };
 		EF35FC011D59783900288C3A /* ZGBarrageFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGBarrageFlowLayout.m; sourceTree = "<group>"; };
+		EF4708C91D5B331E00A5DE64 /* 弹幕效果展示.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "弹幕效果展示.gif"; sourceTree = "<group>"; };
 		EF7360C71D59BA4B00967D6F /* ZGEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGEmitter.h; sourceTree = "<group>"; };
 		EF7360C81D59BA4B00967D6F /* ZGEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGEmitter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +145,7 @@
 		EF2C5EE61D5865E300049AD7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EF4708C91D5B331E00A5DE64 /* 弹幕效果展示.gif */,
 				EF2C5EE71D5865E300049AD7 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -320,6 +323,7 @@
 				EF2C5EF61D5865E300049AD7 /* LaunchScreen.storyboard in Resources */,
 				EF2C5EF31D5865E300049AD7 /* Assets.xcassets in Resources */,
 				EF2C5EF11D5865E300049AD7 /* Main.storyboard in Resources */,
+				EF4708CA1D5B331E00A5DE64 /* 弹幕效果展示.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,6 +42,7 @@
     ZGMagazine *tmpMagazine = [[ZGMagazine alloc] init];
     tmpMagazine.dataArray = magazine;
     tmpMagazine.leaveCount = magazine.count;
+    tmpMagazine.firstStageOfLeaveCount = tmpMagazine.leaveCount;
     [self.magazinesArray addObject:tmpMagazine];
     tmpMagazine.indexInContainer = [self.magazinesArray indexOfObject:tmpMagazine];
     
@@ -55,29 +56,38 @@
 
 - (void)removeMagazineWithIndex:(NSInteger)index
 {
-    // 必须上锁
-    [self.magazinesArray removeObjectAtIndex:index];
-    
-    if (self.magazinesArray.count == 0) {
-        self.barrageView.currentIndex = 0;
+    if (index < self.magazinesArray.count) {
+        
+        // 必须上锁
+        [self.magazinesArray removeObjectAtIndex:index];
+        
+        if (self.magazinesArray.count == 0) {
+            self.barrageView.currentIndex = 0;
+        }
     }
 }
 
 
-- (ZGMagazine *)getMagazine
+- (ZGMagazine *)getMagazineWithIndex:(NSInteger)index
 {
-    return self.magazinesArray.firstObject;
+    if (index < self.magazinesArray.count) {
+        return self.magazinesArray[index];
+    }
+    return nil;
 }
 
 - (void)manageMagazinesArrayWithItemModel:(ZGBarrageItemModel *)itemModel
 {
-    // 对magazine.leaveCount 减一
-    ZGMagazine *magazine = self.magazinesArray[itemModel.containerIndex];
-    magazine.leaveCount--;
-    
     // 检查是否是这个magazine已经显示完
-    if (magazine.leaveCount <= 0) { // 如果显示完，就要移除这个magazine
-        [self removeMagazineWithIndex:itemModel.containerIndex];
+    if (self.magazinesArray.count > 0) {
+        
+        ZGMagazine *magazine = self.magazinesArray.firstObject;
+        // 对magazine.leaveCount 减一
+        //    magazine.leaveCount--;
+        magazine.leaveCount--;
+        if ( magazine && magazine.leaveCount <= 0) { // 如果显示完，就要移除这个magazine
+            [self removeMagazineWithIndex:0];
+        }
     }
 }
 
@@ -94,7 +104,6 @@
         cell = [[ZGBarrageCell alloc] initWithReusableIdentifier:ZGBarrageCellReusableIdentifier];
     }
     
-    cell.textLabel.text = @"abc";
     cell.backgroundColor = [UIColor orangeColor];
     return cell;
 }
@@ -102,8 +111,11 @@
 #pragma mark - emitter 发射完一个magazine
 - (void)emitCompleteWithMagazine:(ZGMagazine *)magazine
 {
+    // 不能移除，因为这里才第一阶段的完成而已
+    // 要第二阶段动画全部完成才能移除magazine
+    // 所以这个方法就提供一下，以后有需要拓展
     // 移除发射完的magazine
-    [self removeMagazineWithIndex:magazine.indexInContainer];
+//    [self removeMagazineWithIndex:magazine.indexInContainer];
 }
 
 @end
