@@ -35,6 +35,7 @@
         _emitter = [[ZGEmitter alloc] init];
         _emitter.dataSource = self;
         _emitter.barrageViewDataSource = _dataSource;
+        [_emitter prepare];
     }
     return self;
 }

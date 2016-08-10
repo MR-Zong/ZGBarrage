@@ -25,6 +25,7 @@
 
 @interface ZGEmitter : NSObject <ZGBarrageCellAnimateDelegate2>
 
+- (void)prepare;
 - (void)start;
 - (void)emitWithBarrageCell:(ZGBarrageCell *)cell;
 

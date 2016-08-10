@@ -26,20 +26,24 @@
 
 @implementation ZGEmitter
 
+- (void)prepare
+{
+    // 发射前，要知道最大行数
+    self.maxRows = [self.dataSource getMaxRows];
+    
+    // 初始化每行是否可以发射的标志
+    self.flagDic = [NSMutableDictionary dictionary];
+    for (int i=0; i<self.maxRows; i++) {
+        [self.flagDic setObject:@(YES) forKey:[NSString stringWithFormat:@"%zd",i]];
+    }
+
+}
+
+
 - (void)start
 {
     // 判断是不是第一次发射
     if (!self.magazine) {
-        
-        // 发射前，要知道最大行数
-        self.maxRows = [self.dataSource getMaxRows];
-        
-        // 初始化每行是否可以发射的标志
-        self.flagDic = [NSMutableDictionary dictionary];
-        for (int i=0; i<self.maxRows; i++) {
-            [self.flagDic setObject:@(YES) forKey:[NSString stringWithFormat:@"%zd",i]];
-        }
-        
         
         self.magazine = [self.dataSource getMagazineWithIndex:0];
         

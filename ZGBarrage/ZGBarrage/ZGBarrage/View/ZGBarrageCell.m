@@ -35,12 +35,35 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 
 - (void)startAnimation
 {
+    // 动画第一种实现方案--可惜有一点缺点，闪烁
     CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
 
     CGFloat relativeValue =  -(self.minimumInteritemSpacing + self.bounds.size.width);
     baseAnimation.toValue =  @(relativeValue);
     baseAnimation.duration = fabs(relativeValue) / Velocity;
     baseAnimation.delegate = self;
+    
+//    CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"position.x"];
+//    
+//    CGFloat relativeValue =  self.superview.bounds.size.width - self.minimumInteritemSpacing - self.bounds.size.width;
+//    baseAnimation.toValue =  @(relativeValue);
+//    baseAnimation.duration = fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity;
+//    baseAnimation.delegate = self;
+    
+//    CGFloat toX =  self.superview.bounds.size.width - self.minimumInteritemSpacing - self.bounds.size.width;
+    
+//    [UIView animateWithDuration:(fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity) animations:^{
+//        self.frame = CGRectMake(toX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+//    } completion:^(BOOL finished) {
+//        if (finished == YES) {
+//            [UIView animateWithDuration:((self.superview.bounds.size.width - self.minimumInteritemSpacing) / Velocity ) animations:^{
+//                self.frame = CGRectMake(-self.bounds.size.width, self.frame.origin.y, self.bounds.size.width, self.bounds.size.height);
+//            } completion:nil];
+//        }
+//    }];
+
+    
+    
     //动画结束时候状态，我动画结束在哪里就停在哪里
 //    baseAnimation.removedOnCompletion = NO;
 //    baseAnimation.fillMode=kCAFillModeForwards;
@@ -58,13 +81,17 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
         CABasicAnimation *baseAnimationFirst = (CABasicAnimation *)anim;
         
         CGFloat fromValue = -(self.minimumInteritemSpacing + self.bounds.size.width);
+//        CGFloat fromValue = self.superview.bounds.size.width - self.minimumInteritemSpacing - self.bounds.size.width;
+
         if (((NSNumber *)baseAnimationFirst.toValue).doubleValue >=  fromValue ) { // 第一阶段动画结束
-            
+//        if (((NSNumber *)baseAnimationFirst.toValue).doubleValue >  0 ) { // 第一阶段动画结束
+        
             // 通知代理
             if (self.animateDelegate2 && [self.animateDelegate2 respondsToSelector:@selector(animation2DidStopWithCell:)]) {
                 [self.animateDelegate2 animation2DidStopWithCell:self];
             }
             
+//            self.layer.transform = CATransform3DMakeTranslation(fromValue, 0, 0);
             // 可以开始第二阶段动画
             CABasicAnimation *baseAnimationSecond = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
             
@@ -73,6 +100,18 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
             baseAnimationSecond.toValue = @(relativeValue);
             baseAnimationSecond.duration = fabs(relativeValue) / (Velocity + 10);
             baseAnimationSecond.delegate = self;
+            
+
+//            CABasicAnimation *baseAnimationSecond = [CABasicAnimation animationWithKeyPath:@"position.x"];
+//            
+//            CGFloat relativeValue = -(self.bounds.size.width);
+//            baseAnimationSecond.fromValue = @(fromValue);
+//            baseAnimationSecond.toValue = @(relativeValue);
+//            baseAnimationSecond.duration = fabs(fromValue - relativeValue) / (Velocity );
+//            baseAnimationSecond.delegate = self;
+
+            
+            
 //            baseAnimationSecond.removedOnCompletion = NO;
 //            baseAnimationSecond.fillMode=kCAFillModeForwards;
 //            baseAnimationSecond.additive = YES;
