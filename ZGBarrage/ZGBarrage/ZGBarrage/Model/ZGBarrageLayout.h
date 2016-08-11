@@ -19,6 +19,6 @@
 
 - (void)prepareLayout;
 - (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath;
-- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath model:(nullable ZGBarrageItemModel *)model;
+- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath itemModel:(nullable ZGBarrageItemModel *)itemModel;
 
 @end

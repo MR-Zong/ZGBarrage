@@ -27,7 +27,7 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 {
     self.textLabel = [[UILabel alloc] init];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
-    self.textLabel.font = [UIFont systemFontOfSize:18];
+    self.textLabel.font = [UIFont systemFontOfSize:14];
 //    self.textLabel.hidden = YES;
     [self addSubview:self.textLabel];
     
@@ -43,6 +43,9 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 //    baseAnimation.duration = fabs(relativeValue) / Velocity;
 //    baseAnimation.delegate = self;
     
+    /**
+     * 第二种方法 也一样有闪烁
+     */
 //    CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"position.x"];
 //    
 //    CGFloat relativeValue =  self.superview.bounds.size.width - self.minimumInteritemSpacing - self.bounds.size.width;
@@ -50,39 +53,53 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 //    baseAnimation.duration = fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity;
 //    baseAnimation.delegate = self;
     
+    
+    //动画结束时候状态，我动画结束在哪里就停在哪里
+    //    baseAnimation.removedOnCompletion = NO;
+    //    baseAnimation.fillMode=kCAFillModeForwards;
+    //    baseAnimation.additive = YES;
+    //    NSLog(@"targetValue %f",relativeValue);
+    //    NSLog(@"duration %f",baseAnimation.duration);
+    
+    //    [self.layer addAnimation:baseAnimation forKey:@"firstAnimation"];
+
+    
+    /**
+     * 第三种方法 简直完美
+     */
     CGFloat toX =  self.superview.bounds.size.width - self.minimumInteritemSpacing - self.bounds.size.width;
-    
-//    [UIView animateWithDuration:(fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity) animations:^{
-//        self.frame = CGRectMake(toX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
-//    } completion:^(BOOL finished) {
-//        if (finished == YES) {
-//            [UIView animateWithDuration:((self.superview.bounds.size.width - self.minimumInteritemSpacing) / Velocity ) animations:^{
-//                self.frame = CGRectMake(-self.bounds.size.width, self.frame.origin.y, self.bounds.size.width, self.bounds.size.height);
-//            } completion:nil];
-//        }
-//    }];
-    
     [UIView animateWithDuration:(fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity) delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         self.frame = CGRectMake(toX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
     } completion:^(BOOL finished) {
-        if (finished == YES) {
+        
+        if (finished == YES) { // 第一阶段动画结束
             
+            // 通知代理
+            if (self.animateDelegate2 && [self.animateDelegate2 respondsToSelector:@selector(animation2DidStopWithCell:)]) {
+                [self.animateDelegate2 animation2DidStopWithCell:self];
+            }
+            
+            // 开始第二阶段动画
             [UIView animateWithDuration:((self.superview.bounds.size.width - self.minimumInteritemSpacing) / Velocity ) delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
                 self.frame = CGRectMake(-self.bounds.size.width, self.frame.origin.y, self.bounds.size.width, self.bounds.size.height);
-            } completion:nil];
+                
+            } completion:^(BOOL finished) { // 第二阶段动画结束
+                if (finished == YES) {
+                    // 随着第二阶段动画结束，该cell已经离开屏幕!!
+                    // 通知barrageView
+                    if (self.animateDelegate && [self.animateDelegate respondsToSelector:@selector(animationDidStopWithCell:)]) {
+                        [self.animateDelegate animationDidStopWithCell:self];
+                        
+                        // removeFromSuperview
+                        [self removeFromSuperview];
+                    }
+                }
+                
+            }];
         }
     }];
 
     
-    
-    //动画结束时候状态，我动画结束在哪里就停在哪里
-//    baseAnimation.removedOnCompletion = NO;
-//    baseAnimation.fillMode=kCAFillModeForwards;
-//    baseAnimation.additive = YES;
-//    NSLog(@"targetValue %f",relativeValue);
-//    NSLog(@"duration %f",baseAnimation.duration);
-    
-//    [self.layer addAnimation:baseAnimation forKey:@"firstAnimation"];
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag

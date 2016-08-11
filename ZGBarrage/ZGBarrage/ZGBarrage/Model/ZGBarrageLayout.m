@@ -21,7 +21,7 @@
     return [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath model:(ZGBarrageItemModel *)model
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath itemModel:(nullable ZGBarrageItemModel *)itemModel
 {
     return [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
 }

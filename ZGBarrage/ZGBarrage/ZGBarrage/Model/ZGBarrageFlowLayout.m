@@ -74,11 +74,16 @@
     return attr;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath model:(ZGBarrageItemModel *)model
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath itemModel:(ZGBarrageItemModel *)itemModel
 {
-    return [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+    // 根据model,来算实际的宽度
+    UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+    CGFloat attrY = self.edgeInsets.top + indexPath.section * (self.itemSize.height + self.minimumLineSpacing);
+    CGFloat attrWidth = [itemModel.text boundingRectWithSize:CGSizeMake(self.barrageView.bounds.size.width, self.itemSize.height) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.width;
+    attr.frame = CGRectMake(self.barrageView.bounds.size.width, attrY, attrWidth, self.itemSize.height);
+    
+    return attr;
 }
-
 
 
 - (CGSize)itemSizeWithModel:(ZGBarrageItemModel *)itemModel

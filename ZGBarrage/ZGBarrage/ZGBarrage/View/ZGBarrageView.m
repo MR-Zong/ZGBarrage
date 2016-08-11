@@ -99,12 +99,11 @@
     
 //    NSLog(@"item %zd - section %zd",indexPath.item,indexPath.section);
     // 1,先拿到布局信息
-    UICollectionViewLayoutAttributes *layoutAttribute = [self.layout layoutAttributesForItemAtIndexPath:indexPath];
+    UICollectionViewLayoutAttributes *layoutAttribute = [self.layout layoutAttributesForItemAtIndexPath:indexPath itemModel:itemModel];
     
     // 2,拿到cell视图
     ZGBarrageCell *cell = [self.dataSource barrageView:self cellForItemAtIndexPath:indexPath];
     cell.frame = layoutAttribute.frame;
-//    NSLog(@"layoutAttribute.frame %@",NSStringFromCGRect(layoutAttribute.frame));
     cell.textLabel.frame = cell.bounds;
     cell.animateDelegate = self;
     cell.animateDelegate2 = self.emitter;
