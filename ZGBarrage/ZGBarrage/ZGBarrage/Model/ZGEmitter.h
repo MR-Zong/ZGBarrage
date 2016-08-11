@@ -25,8 +25,19 @@
 
 @interface ZGEmitter : NSObject <ZGBarrageCellAnimateDelegate2>
 
+/**
+ * 注意，一定要先调用prepare
+ */
 - (void)prepare;
+
+/**
+ * 启动发射
+ */
 - (void)start;
+
+/**
+ * 发射一个barrageCell
+ */
 - (void)emitWithBarrageCell:(ZGBarrageCell *)cell;
 
 

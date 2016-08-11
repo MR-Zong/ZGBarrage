@@ -28,7 +28,6 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
     self.textLabel = [[UILabel alloc] init];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.font = [UIFont systemFontOfSize:14];
-//    self.textLabel.hidden = YES;
     [self addSubview:self.textLabel];
     
 }

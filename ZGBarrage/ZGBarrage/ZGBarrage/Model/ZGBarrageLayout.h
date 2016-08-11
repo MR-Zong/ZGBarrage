@@ -12,6 +12,10 @@
 
 @class ZGBarrageView;
 
+
+/**
+ * 该类(抽象类)一般不直接使用，一般都继承它
+ */
 @interface ZGBarrageLayout : NSObject
 
 @property (nonatomic, weak) ZGBarrageView *barrageView;

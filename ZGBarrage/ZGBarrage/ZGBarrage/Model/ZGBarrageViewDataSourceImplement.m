@@ -48,10 +48,6 @@
     
     // 添加完数据，通知barrageView将数据显示到屏幕
     [self.barrageView reloadDataWithMagazine:tmpMagazine];
-    
-    // 添加完magazine 通知emitter
-//    [self.barrageView.emitter start];
-    
 }
 
 - (void)removeMagazineWithIndex:(NSInteger)index
