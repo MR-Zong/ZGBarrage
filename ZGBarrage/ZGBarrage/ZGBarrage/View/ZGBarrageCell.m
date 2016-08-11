@@ -36,12 +36,12 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 - (void)startAnimation
 {
     // 动画第一种实现方案--可惜有一点缺点，闪烁
-    CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
-
-    CGFloat relativeValue =  -(self.minimumInteritemSpacing + self.bounds.size.width);
-    baseAnimation.toValue =  @(relativeValue);
-    baseAnimation.duration = fabs(relativeValue) / Velocity;
-    baseAnimation.delegate = self;
+//    CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
+//
+//    CGFloat relativeValue =  -(self.minimumInteritemSpacing + self.bounds.size.width);
+//    baseAnimation.toValue =  @(relativeValue);
+//    baseAnimation.duration = fabs(relativeValue) / Velocity;
+//    baseAnimation.delegate = self;
     
 //    CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"position.x"];
 //    
@@ -50,7 +50,7 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 //    baseAnimation.duration = fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity;
 //    baseAnimation.delegate = self;
     
-//    CGFloat toX =  self.superview.bounds.size.width - self.minimumInteritemSpacing - self.bounds.size.width;
+    CGFloat toX =  self.superview.bounds.size.width - self.minimumInteritemSpacing - self.bounds.size.width;
     
 //    [UIView animateWithDuration:(fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity) animations:^{
 //        self.frame = CGRectMake(toX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
@@ -61,6 +61,17 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 //            } completion:nil];
 //        }
 //    }];
+    
+    [UIView animateWithDuration:(fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity) delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.frame = CGRectMake(toX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+    } completion:^(BOOL finished) {
+        if (finished == YES) {
+            
+            [UIView animateWithDuration:((self.superview.bounds.size.width - self.minimumInteritemSpacing) / Velocity ) delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+                self.frame = CGRectMake(-self.bounds.size.width, self.frame.origin.y, self.bounds.size.width, self.bounds.size.height);
+            } completion:nil];
+        }
+    }];
 
     
     
@@ -71,7 +82,7 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 //    NSLog(@"targetValue %f",relativeValue);
 //    NSLog(@"duration %f",baseAnimation.duration);
     
-    [self.layer addAnimation:baseAnimation forKey:@"firstAnimation"];
+//    [self.layer addAnimation:baseAnimation forKey:@"firstAnimation"];
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
@@ -110,7 +121,6 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 //            baseAnimationSecond.duration = fabs(fromValue - relativeValue) / (Velocity );
 //            baseAnimationSecond.delegate = self;
 
-            
             
 //            baseAnimationSecond.removedOnCompletion = NO;
 //            baseAnimationSecond.fillMode=kCAFillModeForwards;
