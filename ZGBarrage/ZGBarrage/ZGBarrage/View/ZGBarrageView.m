@@ -104,7 +104,9 @@
     // 2,拿到cell视图
     ZGBarrageCell *cell = [self.dataSource barrageView:self cellForItemAtIndexPath:indexPath];
     cell.frame = layoutAttribute.frame;
-    cell.textLabel.frame = cell.bounds;
+    
+    cell.imageView.frame = CGRectMake(0, 0, 45, 45);
+    cell.textLabel.frame = CGRectMake(45, 0, cell.bounds.size.width - 45, cell.bounds.size.height);
     cell.animateDelegate = self;
     cell.animateDelegate2 = self.emitter;
     cell.minimumInteritemSpacing = ((ZGBarrageFlowLayout *)self.layout).minimumInteritemSpacing;

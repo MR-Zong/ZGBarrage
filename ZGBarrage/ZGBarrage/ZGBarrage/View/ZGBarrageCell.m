@@ -13,6 +13,12 @@
 
 NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdentifier";
 
+@interface ZGBarrageCell ()
+
+//@property (nonatomic, assign) NSInteger clickCount;
+
+@end
+
 @implementation ZGBarrageCell
 
 - (instancetype)initWithReusableIdentifier:(NSString *)identifer{
@@ -25,7 +31,15 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 
 - (void)setupViews
 {
+    self.imageView = [[UIImageView alloc] init];
+    self.imageView.backgroundColor = [UIColor greenColor];
+    self.imageView.userInteractionEnabled = YES;
+    [self.imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressImageView:)]];
+    [self addSubview:self.imageView];
+    
     self.textLabel = [[UILabel alloc] init];
+    self.textLabel.userInteractionEnabled = YES;
+    [self.textLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressTextLabel:)]];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.font = [UIFont systemFontOfSize:14];
     [self addSubview:self.textLabel];
@@ -67,7 +81,7 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
      * 第三种方法 简直完美
      */
     CGFloat toX =  self.superview.bounds.size.width - self.minimumInteritemSpacing - self.bounds.size.width;
-    [UIView animateWithDuration:(fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity) delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:(fabs(self.minimumInteritemSpacing + self.bounds.size.width) / Velocity) delay:0 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
         self.frame = CGRectMake(toX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
     } completion:^(BOOL finished) {
         
@@ -79,7 +93,7 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
             }
             
             // 开始第二阶段动画
-            [UIView animateWithDuration:((self.superview.bounds.size.width - self.minimumInteritemSpacing) / Velocity ) delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            [UIView animateWithDuration:((self.superview.bounds.size.width - self.minimumInteritemSpacing) / Velocity ) delay:0 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
                 self.frame = CGRectMake(-self.bounds.size.width, self.frame.origin.y, self.bounds.size.width, self.bounds.size.height);
                 
             } completion:^(BOOL finished) { // 第二阶段动画结束
@@ -161,6 +175,7 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 }
 
 
+
 #pragma mark - 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
@@ -171,23 +186,40 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
     CALayer *layer =  self.layer.presentationLayer;
 //    NSLog(@"layer.frame %@",NSStringFromCGRect(layer.frame));
     
-    CGPoint newPoint = [self convertPoint:point toView:self.superview];
-//    NSLog(@"newPoint %@",NSStringFromCGPoint(newPoint));
+    CGPoint superViewPoint = [self convertPoint:point toView:self.superview];
+//    NSLog(@"superViewPoint %@",NSStringFromCGPoint(superViewPoint));
     
-    CGPoint selfPoint = [self convertPoint:newPoint toFrame:layer.frame];
+    CGPoint selfPoint = [self convertPoint:superViewPoint toFrame:layer.frame];
 //    NSLog(@"selfPoint %@",NSStringFromCGPoint(selfPoint));
-    static BOOL flag = YES;
-    if (flag == YES) {
-//        flag = NO;
-        if ([self pointInside:selfPoint frame:layer.frame] == YES ) {
-//            NSLog(@"你点到我啦！哼~");
-            NSLog(@"text %@",self.itemModel.text);
-        }
-    }
+//        if ([self pointInside:selfPoint frame:layer.frame] == YES ) {
+//            self.clickCount++;
+//            if (self.clickCount % 2 != 0) { // 解决double clike问题
+//                return nil;
+//            }
+//
+////            NSLog(@"你点到我啦！哼~");
+//            NSLog(@"text %@",self.itemModel.text);
+//        }
     
     
-    
-   return [super hitTest:point withEvent:event];
+//    NSLog(@"hitTest %@",[super hitTest:selfPoint withEvent:event]);
+   return [super hitTest:selfPoint withEvent:event];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touchesBegan");
+    return [super touchesBegan:touches withEvent:event];
+}
+
+- (void)didPressImageView:(UITapGestureRecognizer *)tap
+{
+    NSLog(@"didPressImageView");
+}
+
+- (void)didPressTextLabel:(UITapGestureRecognizer *)tap
+{
+    NSLog(@"didPressTextLabel");
 }
 
 - (BOOL)pointInside:(CGPoint)point frame:(CGRect)frame
@@ -203,11 +235,9 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 
 - (CGPoint)convertPoint:(CGPoint)point toFrame:(CGRect)frame
 {
-    CGFloat newX =  point.x - fabs(frame.origin.x);
-    CGFloat newY =  point.y - fabs(frame.origin.y);
-    CGPoint newPoint = CGPointMake(newX, newY);
-    
-    return newPoint;
+    CGFloat newX =  point.x - frame.origin.x;
+    CGFloat newY =  point.y - frame.origin.y;
+    return CGPointMake(newX, newY);
 }
 
 

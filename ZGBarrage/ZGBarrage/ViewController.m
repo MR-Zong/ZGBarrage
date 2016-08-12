@@ -28,21 +28,7 @@
     // 模拟数据
     for (int j= 0; j<1; j++) {
         
-        NSMutableArray *mDataArray = [NSMutableArray array];
-        for (int i=0; i<100; i++) {
-            ZGBarrageItemModel *model = [[ZGBarrageItemModel alloc] init];
-            if (i%3 == 0) {
-                model.text = @"奥运加油！";
-            }else if (i%3 == 1){
-                model.text = @"中国健儿好厉害~";
-            }else if(i%3 == 2){
-                model.text = @"傅园慧，天生带笑感的段子手~";
-            }
-            
-            [mDataArray addObject:model];
-        }
-        
-        [self.barrageView addDataArray:mDataArray.copy];
+        [self barrageViewAddDataArrayWithSize:1];
     }
     
     self.barrageView.backgroundColor = [UIColor redColor];
@@ -87,7 +73,6 @@
 - (void)barrageViewAddDataArrayWithSize:(NSInteger)size
 {
     NSLog(@"size %zd",size);
-    return;
     NSMutableArray *mDataArray = [NSMutableArray array];
     for (int i=0; i<size; i++) {
         ZGBarrageItemModel *model = [[ZGBarrageItemModel alloc] init];

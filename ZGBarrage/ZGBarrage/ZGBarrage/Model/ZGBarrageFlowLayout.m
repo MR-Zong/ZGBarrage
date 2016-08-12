@@ -80,7 +80,7 @@
     UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     CGFloat attrY = self.edgeInsets.top + indexPath.section * (self.itemSize.height + self.minimumLineSpacing);
     CGFloat attrWidth = [itemModel.text boundingRectWithSize:CGSizeMake(self.barrageView.bounds.size.width, self.itemSize.height) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.width;
-    attr.frame = CGRectMake(self.barrageView.bounds.size.width, attrY, attrWidth, self.itemSize.height);
+    attr.frame = CGRectMake(self.barrageView.bounds.size.width, attrY, attrWidth + 45, self.itemSize.height);
     
     return attr;
 }
