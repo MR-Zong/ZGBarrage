@@ -56,7 +56,7 @@
     btn1.backgroundColor = [UIColor redColor];
     btn1.tag = 1;
     btn1.frame = CGRectMake(20, CGRectGetMaxY(self.barrageView.frame) +50, 80, 40);
-    [btn1 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchDragInside];
+    [btn1 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn1];
     
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -64,7 +64,7 @@
     btn2.backgroundColor = [UIColor orangeColor];
     btn2.tag = 2;
     btn2.frame = CGRectMake(CGRectGetMaxX(btn1.frame) + 20, btn1.frame.origin.y, 80, 40);
-    [btn2 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchDragInside];
+    [btn2 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
 
     UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -72,7 +72,7 @@
     [btn3 setTitle:@"3" forState:UIControlStateNormal];
     btn3.tag = 3;
     btn3.frame = CGRectMake(CGRectGetMaxX(btn2.frame) + 20, btn1.frame.origin.y, 80, 40);
-    [btn3 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchDragInside];
+    [btn3 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn3];
 
 }
@@ -87,6 +87,7 @@
 - (void)barrageViewAddDataArrayWithSize:(NSInteger)size
 {
     NSLog(@"size %zd",size);
+    return;
     NSMutableArray *mDataArray = [NSMutableArray array];
     for (int i=0; i<size; i++) {
         ZGBarrageItemModel *model = [[ZGBarrageItemModel alloc] init];
