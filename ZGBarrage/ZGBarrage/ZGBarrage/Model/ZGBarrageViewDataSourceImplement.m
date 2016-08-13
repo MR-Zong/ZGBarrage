@@ -40,12 +40,19 @@
 {
     // 必须上锁
     ZGMagazine *tmpMagazine = [[ZGMagazine alloc] init];
+    tmpMagazine.startIndex = self.currentIndex; // 切记
+    NSLog(@"tmpMagazine.startIndex %zd",tmpMagazine.startIndex);
     tmpMagazine.dataArray = magazine;
     tmpMagazine.leaveCount = magazine.count;
     tmpMagazine.firstStageOfLeaveCount = tmpMagazine.leaveCount;
     [self.magazinesArray addObject:tmpMagazine];
     tmpMagazine.indexInContainer = [self.magazinesArray indexOfObject:tmpMagazine];
     
+    self.maxCount += tmpMagazine.dataArray.count;
+    if (self.magazinesArray.count > 0) {
+        self.currentIndex += tmpMagazine.dataArray.count;
+    }
+
     // 添加完数据，通知barrageView将数据显示到屏幕
     [self.barrageView reloadDataWithMagazine:tmpMagazine];
 }
@@ -55,10 +62,14 @@
     if (index < self.magazinesArray.count) {
         
         // 必须上锁
+        
+//        // 移除就要减去totalCount
+//        self.totalCount -= ((ZGMagazine *)self.magazinesArray[index]).dataArray.count;
+        
         [self.magazinesArray removeObjectAtIndex:index];
         
         if (self.magazinesArray.count == 0) {
-            self.barrageView.currentIndex = 0;
+            self.currentIndex = 0;
         }
     }
 }
@@ -70,6 +81,53 @@
         return self.magazinesArray[index];
     }
     return nil;
+}
+
+- (ZGBarrageItemModel *)getItemModelWithIndexPath:(NSIndexPath *)indexPath
+{
+    // 根据indexPath，来获取
+    
+    //    NSInteger section = 0;
+    //    NSInteger item = 0;
+    //    for (int i=0; i<self.magazine.count; i++) {
+    //        item = i / self.maxRows;
+    //        section = i % self.maxRows;
+    //    }
+
+    // 1，把indexPath 转换 一维index
+    NSInteger maxRows = [self.barrageView getMaxRows];
+    NSInteger normalIndex = indexPath.item * maxRows + indexPath.section;
+    
+    // 2,必须注意indexPath必须是有效的
+    if (normalIndex >= 0 && normalIndex < self.maxCount - 1) { // 有效
+        
+        //3,一维index 转换成 在哪个magazine的第几个index
+        NSInteger indexOfMagazine = 0;
+        NSInteger indexInMagazine = 0;
+        while ((int)indexOfMagazine < (int)self.magazinesArray.count) {
+            ZGMagazine *tmpMagazine = self.magazinesArray[indexOfMagazine];
+            NSInteger startIndex = tmpMagazine.startIndex;
+            NSInteger magazineLength = tmpMagazine.dataArray.count;
+            if ( normalIndex >= startIndex && normalIndex < startIndex + magazineLength) {
+                indexInMagazine = normalIndex - startIndex;
+                break;
+            }
+            
+            indexOfMagazine++;
+        }
+        
+        if (indexOfMagazine >= self.magazinesArray.count) {
+            // 说明这个indexPath的itemModel所在的magazine已经由于全部发射完成，而被移除
+            return nil;
+        }
+        
+        ZGMagazine *magazine = self.magazinesArray[indexOfMagazine];
+        ZGBarrageItemModel *itemModel = magazine.dataArray[indexInMagazine];
+        return itemModel;
+        
+    }else {
+        return nil;
+    }
 }
 
 - (void)manageMagazinesArrayWithItemModel:(ZGBarrageItemModel *)itemModel

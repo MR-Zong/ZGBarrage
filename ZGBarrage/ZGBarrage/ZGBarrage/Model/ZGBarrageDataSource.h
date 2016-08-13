@@ -30,4 +30,6 @@
 
 - (ZGMagazine *)getMagazineWithIndex:(NSInteger)index;
 
+- (ZGBarrageItemModel *)getItemModelWithIndexPath:(NSIndexPath *)indexPath;
+
 @end

@@ -63,10 +63,21 @@
 }
 
 
+- (NSInteger)getMaxRows
+{
+    return self.layout.maxRows;
+}
+
 - (void)reloadDataWithMagazine:(ZGMagazine *)magazine
 {
+//    // 判断emitter里面是不是正在发射
+//    if (self.emitter.magazine.firstStageOfLeaveCount > 0) {
+//        // 正在发射就不用启动发射器了
+//        return;
+//    }
+
     // 发射器开始发射
-    [_emitter start];
+    [_emitter startWithMagazine:magazine];
   
 }
 
@@ -84,7 +95,7 @@
 }
 
 #pragma mark - ZGEmitterDataSource
-- (NSInteger)getMaxRows
+- (NSInteger)emitterGetMaxRows
 {
     return self.layout.maxRows;
 }

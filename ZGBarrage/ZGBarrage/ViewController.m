@@ -26,10 +26,11 @@
     self.barrageView = [[ZGBarrageView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 300) barrageLayout:flowLayout];
     
     // 模拟数据
-    for (int j= 0; j<1; j++) {
-        
-        [self barrageViewAddDataArrayWithSize:1];
-    }
+//    [self barrageViewAddDataArrayWithSize:3];
+//    [self barrageViewAddDataArrayWithSize:7];
+//    [self barrageViewAddDataArrayWithSize:4];
+    
+    
     
     self.barrageView.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.barrageView];
@@ -54,7 +55,7 @@
     [self.view addSubview:btn2];
 
     UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeSystem];
-    btn3.backgroundColor = [UIColor blueColor];
+    btn3.backgroundColor = [UIColor greenColor];
     [btn3 setTitle:@"3" forState:UIControlStateNormal];
     btn3.tag = 3;
     btn3.frame = CGRectMake(CGRectGetMaxX(btn2.frame) + 20, btn1.frame.origin.y, 80, 40);
@@ -72,7 +73,6 @@
 
 - (void)barrageViewAddDataArrayWithSize:(NSInteger)size
 {
-    NSLog(@"size %zd",size);
     NSMutableArray *mDataArray = [NSMutableArray array];
     for (int i=0; i<size; i++) {
         ZGBarrageItemModel *model = [[ZGBarrageItemModel alloc] init];

@@ -10,6 +10,7 @@
 #import "ZGBarrageViewDataSourceImplement.h"
 #import "ZGBarrageFlowLayout.h"
 #import "ZGBarrageItemModel.h"
+#import "ZGEmitter.h"
 
 @class ZGMagazine;
 
@@ -23,7 +24,6 @@
 @property (nonatomic, strong) ZGEmitter *emitter;
 
 
-@property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, strong) ZGBarrageLayout *layout;
 
 /**
@@ -48,5 +48,9 @@
 - (__kindof ZGBarrageCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
 
 
+/**
+ * 获取最大显示行数
+ */
+- (NSInteger)getMaxRows;
 
 @end

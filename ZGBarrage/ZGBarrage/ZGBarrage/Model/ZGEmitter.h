@@ -17,13 +17,17 @@
 
 @protocol ZGEmitterDataSource <NSObject>
 
+@property (nonatomic, strong) ZGMagazine *magazine;
+
 - (ZGBarrageCell *)emitter:(ZGEmitter *)emitter cellForItemAtIndexPath:(NSIndexPath *)indexPath itemModel:(ZGBarrageItemModel *)itemModel;
 - (ZGMagazine *)getMagazineWithIndex:(NSInteger)index;
-- (NSInteger)getMaxRows;
+- (NSInteger)emitterGetMaxRows;
 
 @end
 
 @interface ZGEmitter : NSObject <ZGBarrageCellAnimateDelegate2>
+
+@property (nonatomic, strong) ZGMagazine *magazine;
 
 /**
  * 注意，一定要先调用prepare
@@ -33,7 +37,7 @@
 /**
  * 启动发射
  */
-- (void)start;
+- (void)startWithMagazine:(ZGMagazine *)magazine;
 
 /**
  * 发射一个barrageCell

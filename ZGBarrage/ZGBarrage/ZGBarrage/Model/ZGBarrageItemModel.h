@@ -19,4 +19,6 @@
 
 @property (nonatomic, copy) NSString *imageUrlString;
 
+@property (nonatomic, assign) BOOL isEmit;
+
 @end

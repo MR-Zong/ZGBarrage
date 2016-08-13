@@ -13,6 +13,10 @@
 
 @interface ZGBarrageViewDataSourceImplement : NSObject <ZGBarrageViewDataSource>
 
+@property (nonatomic, assign) NSInteger currentIndex;
+
+@property (nonatomic, assign) NSInteger maxCount;
+
 /**
  * 构造器
  */
