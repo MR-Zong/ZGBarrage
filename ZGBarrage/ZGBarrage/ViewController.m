@@ -21,6 +21,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 宣传口号~
+    UILabel *titleLable = [[UILabel alloc] init];
+    titleLable.text = @"可以点击的弹幕！";
+    titleLable.backgroundColor = [UIColor blackColor];
+    titleLable.textColor = [UIColor yellowColor];
+    titleLable.textAlignment = NSTextAlignmentCenter;
+    titleLable.font = [UIFont systemFontOfSize:20];
+    titleLable.frame = CGRectMake((self.view.bounds.size.width- 200) / 2.0, 50, 200, 40);
+    [self.view addSubview:titleLable];
+    
+    
+    
+    
+    // 使用样例
     // 注意,barrageView跟collectionView一样要有个布局Layout
     ZGBarrageFlowLayout *flowLayout = [[ZGBarrageFlowLayout alloc] init];
     self.barrageView = [[ZGBarrageView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 300) barrageLayout:flowLayout];
@@ -29,8 +43,6 @@
 //    [self barrageViewAddDataArrayWithSize:3];
 //    [self barrageViewAddDataArrayWithSize:7];
 //    [self barrageViewAddDataArrayWithSize:4];
-    
-    
     
     self.barrageView.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.barrageView];
@@ -62,14 +74,37 @@
     [btn3 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn3];
 
+    
+    UIButton *btn4 = [UIButton buttonWithType:UIButtonTypeSystem];
+    btn4.backgroundColor = [UIColor lightGrayColor];
+    [btn4 setTitle:@"发自己弹幕" forState:UIControlStateNormal];
+    btn4.tag = 4;
+    btn4.frame = CGRectMake(btn1.frame.origin.x, CGRectGetMaxY(btn1.frame) + 20, 80, 40);
+    [btn4 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn4];
+
 }
 
 
 - (void)didBtnPress:(UIButton *)btn
 {
-    [self barrageViewAddDataArrayWithSize:btn.tag];
+    if (btn.tag == 4) { // 添加自己的弹幕
+        [self barrageViewAddMineItemModel];
+        
+    }else { // 添加别人的弹幕
+        
+        [self barrageViewAddDataArrayWithSize:btn.tag];
+    }
+    
 }
 
+
+- (void)barrageViewAddMineItemModel
+{
+    ZGBarrageItemModel *mineItemModel = [[ZGBarrageItemModel alloc] init];
+    mineItemModel.text = @"宗根的弹幕";
+    [self.barrageView addMineItemModel:mineItemModel];
+}
 
 - (void)barrageViewAddDataArrayWithSize:(NSInteger)size
 {

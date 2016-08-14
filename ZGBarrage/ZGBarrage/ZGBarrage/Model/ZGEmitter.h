@@ -29,10 +29,21 @@
 
 @property (nonatomic, strong) ZGMagazine *magazine;
 
+- (void)resetSectionLastedIndexPathDic;
+
+
 /**
  * 注意，一定要先调用prepare
  */
 - (void)prepare;
+
+
+/**
+ * 发射自己发的弹幕
+ */
+- (void)sendMineItemModelsArray:(NSMutableArray *)mineItemModelsArray;
+
+
 
 /**
  * 启动发射

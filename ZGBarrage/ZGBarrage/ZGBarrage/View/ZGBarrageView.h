@@ -28,6 +28,13 @@
 
 /**
  * 设置，并显示弹幕模型数组，注意数组元素类型一定要ZGBarrageItemModel
+ * 注意，此方法用于添加--自己发的弹幕
+ */
+- (void)addMineItemModel:(ZGBarrageItemModel *)mineItemModel;
+
+/**
+ * 设置，并显示弹幕模型数组，注意数组元素类型一定要ZGBarrageItemModel
+ * 注意，此方法用于添加--别人发的弹幕
  */
 - (void)addDataArray:(NSArray *)dataArray;
 
@@ -35,6 +42,11 @@
  * reload
  */
 - (void)reloadDataWithMagazine:(ZGMagazine *)magazine;
+
+/**
+ * 发射自己发的弹幕
+ */
+- (void)sendMineItemModelsArray:(NSMutableArray *)mineItemModelsArray;
 
 /**
  * 初始化方法

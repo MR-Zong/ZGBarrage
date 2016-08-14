@@ -32,9 +32,21 @@
 {
     if (self = [super init]) {
           _magazinesArray = [NSMutableArray array];
+        _mineItemModelsArray = [NSMutableArray array];
     }
     return self;
 }
+
+- (void)addMineItemModel:(ZGBarrageItemModel *)mineItemModel
+{
+    // 上锁
+    [self.mineItemModelsArray addObject:mineItemModel];
+    
+    // 添加完数据，通知barrageView将数据显示到屏幕
+    [self.barrageView sendMineItemModelsArray:self.mineItemModelsArray];
+    
+}
+
 
 - (void)addMagazine:(NSArray *)magazine
 {
@@ -70,6 +82,7 @@
         
         if (self.magazinesArray.count == 0) {
             self.currentIndex = 0;
+            [self.barrageView.emitter resetSectionLastedIndexPathDic];
         }
     }
 }
@@ -99,7 +112,7 @@
     NSInteger normalIndex = indexPath.item * maxRows + indexPath.section;
     
     // 2,必须注意indexPath必须是有效的
-    if (normalIndex >= 0 && normalIndex < self.maxCount - 1) { // 有效
+    if (normalIndex >= 0 && normalIndex < self.maxCount) { // 有效
         
         //3,一维index 转换成 在哪个magazine的第几个index
         NSInteger indexOfMagazine = 0;

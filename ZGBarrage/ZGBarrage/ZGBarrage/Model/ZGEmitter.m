@@ -20,6 +20,9 @@
 /**该section是否有弹幕在飘*/
 @property (nonatomic, strong) NSMutableDictionary *hasItemInSectionFlagDic;
 
+/**弹道当前indexPath*/
+@property (nonatomic, strong) NSMutableDictionary *sectionLastedEmitIndexPathDic;
+
 
 @property (nonatomic, assign) NSInteger maxRows;
 
@@ -39,31 +42,113 @@
         [self.canEmitFlagDic setObject:@(YES) forKey:[NSString stringWithFormat:@"%zd",i]];
     }
     
+    // 初始化弹道当前indexPath
+    self.sectionLastedEmitIndexPathDic = [NSMutableDictionary dictionary];
+    for (int i=0; i<self.maxRows; i++) {
+        [self.sectionLastedEmitIndexPathDic setObject:[NSIndexPath indexPathForItem:-1 inSection:i] forKey:[NSString stringWithFormat:@"%zd",i]];
+    }
+
+    
     // 初始化每行是否已经有item的标志
     self.hasItemInSectionFlagDic = [NSMutableDictionary dictionary];
     for (int i=0; i<self.maxRows; i++) {
         [self.hasItemInSectionFlagDic setObject:@(NO) forKey:[NSString stringWithFormat:@"%zd",i]];
     }
 
+    
+
+}
+
+
+- (void)sendMineItemModelsArray:(NSMutableArray *)mineItemModelsArray
+{
+    // 扫描全部弹道
+    for (int i=0; i<self.maxRows; i++) {
+        NSInteger section = i;
+        // 每次扫描操作
+        // 1,判断该弹道的标志是否为yes
+        if ([[self.canEmitFlagDic valueForKey:[NSString stringWithFormat:@"%zd",i]] boolValue] == YES) {
+            
+            // 自己的弹幕用的就是当前弹道的lastedIndexPath
+            NSIndexPath *lastedIndexPath = self.sectionLastedEmitIndexPathDic[[NSString stringWithFormat:@"%zd",section]];
+            
+            // 获取mineItemModelsArray.firstObject
+            ZGBarrageItemModel *mineItemModel = mineItemModelsArray.firstObject;
+            if (!mineItemModel) { // 为空，说明已经发射完自己的弹幕
+                return;
+            }
+            
+            // 修改mineItemModel的indexPath 为 lastedIndexPath
+            mineItemModel.indexPath = lastedIndexPath;
+            
+            // 根据LastedIndexPath 获取cell
+            ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:lastedIndexPath itemModel:mineItemModel];
+            cell.itemModel.indexPath = lastedIndexPath;
+            [cell startAnimation];
+            cell.itemModel.isEmit = YES;
+            // 发射后，设置标志位
+            [self.canEmitFlagDic setValue:@(NO) forKey:[NSString stringWithFormat:@"%zd",section]];
+            [self.sectionLastedEmitIndexPathDic setObject:lastedIndexPath forKey:[NSString stringWithFormat:@"%zd",section]];
+            
+            // 发射完自己的弹幕，要移除mineItemModel
+            [self.barrageViewDataSource.mineItemModelsArray removeObjectAtIndex:0];
+            
+        }else { // 判断该弹道的标志为no
+            NSLog(@"NO,不用管，emitter自己会发射");
+        }
+    }
 
 }
 
 
 - (void)startWithMagazine:(ZGMagazine *)magazine
 {
-//    // 判断是不是第一次发射
-//    if (!self.magazine) {
-//        
-//        self.magazine = [self.dataSource getMagazineWithIndex:0];
-//        
-//        if (self.magazine == nil) { // 排除异常--获取新的magazine是Nil
-//            return;
-//        }
-//
-//        // 开始发射
-//        [self emitStart];
-//    }
+    // 每次addMagazine都要扫描全部弹道
+    for (int i=0; i<self.maxRows; i++) {
+        // 每次扫描操作
+        // 1,判断该弹道标志是否为yes
+        if ([[self.canEmitFlagDic valueForKey:[NSString stringWithFormat:@"%zd",i]] boolValue] == YES) {
+            
+            // 2,取当前弹道sectionLastedEmitIndexPathDic ,并由它算出nextIndexPath
+            NSInteger item = 0;
+            NSInteger section = i;
+            NSIndexPath *lastedIndexPath = self.sectionLastedEmitIndexPathDic[[NSString stringWithFormat:@"%zd",section]];
+            if (lastedIndexPath.item == -1) { // 该弹道从未发射过item
+                item = 0;
+            }else {
+                item = lastedIndexPath.item + 1;
+            }
+            NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+            NSLog(@"nextIndexPath,item = %zd,section = %zd",nextIndexPath.item,nextIndexPath.section);
+            
+            
+            
+            // 3,根据nextIndexPath,获取itemModel
+            ZGBarrageItemModel *nextItemModel = [self.barrageViewDataSource getItemModelWithIndexPath:nextIndexPath];
+            
+            if (!nextItemModel) { // 为空，说明没有此itemModel
+                ;
+            }else {
+                
+                // 有，根据itemModel，获取cell,然后，立即发射
+                ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:nextIndexPath itemModel:nextItemModel];
+                cell.itemModel.indexPath = nextIndexPath;
+                [cell startAnimation];
+                cell.itemModel.isEmit = YES;
+                // 发射后，设置标志位
+                [self.canEmitFlagDic setValue:@(NO) forKey:[NSString stringWithFormat:@"%zd",section]];
+                [self.sectionLastedEmitIndexPathDic setObject:nextIndexPath forKey:[NSString stringWithFormat:@"%zd",section]];
+            }
+            
+        }else { // 判断该弹道标志是否为NO
+             NSLog(@"还不能发,什么都不做，因为emitter会自己接着来获取它，并发射");
+        }
+    }
     
+    
+    
+    return;
+    // 第一种方案
     // 判断是不是正在发射
     if (!self.magazine && self.magazine.firstStageOfLeaveCount<= 0) { // 没有在发射
         self.magazine = magazine;
@@ -108,6 +193,8 @@
     
 }
 
+
+// 第一种方案
 - (void)emitStart
 {
     // 一开始发射的时候，要算出该magazine的起始indexPath
@@ -146,19 +233,89 @@
 
 - (void)emitWithBarrageCell:(ZGBarrageCell *)cell
 {
+    // 找下一个itemModel,之前，要先检查是否有自己发的弹幕
+    if (self.barrageViewDataSource.mineItemModelsArray.count > 0) { // 有自己的弹幕未发，就要优先发
+        NSInteger section = cell.itemModel.indexPath.section;
+        // 发射自己的弹幕
+        // 自己的弹幕用的就是当前弹道的lastedIndexPath
+        NSIndexPath *lastedIndexPath = self.sectionLastedEmitIndexPathDic[[NSString stringWithFormat:@"%zd",section]];
+        
+        // 获取mineItemModelsArray.firstObject
+        ZGBarrageItemModel *mineItemModel = self.barrageViewDataSource.mineItemModelsArray.firstObject;
+        
+        // 修改mineItemModel的indexPath 为 lastedIndexPath
+        mineItemModel.indexPath = lastedIndexPath;
+        
+        // 根据LastedIndexPath 获取cell
+        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:lastedIndexPath itemModel:mineItemModel];
+        cell.itemModel.indexPath = lastedIndexPath;
+        [cell startAnimation];
+        cell.itemModel.isEmit = YES;
+        // 发射后，设置标志位
+        [self.canEmitFlagDic setValue:@(NO) forKey:[NSString stringWithFormat:@"%zd",section]];
+        [self.sectionLastedEmitIndexPathDic setObject:lastedIndexPath forKey:[NSString stringWithFormat:@"%zd",section]];
+
+        // 发射完自己的弹幕，要移除mineItemModel
+        [self.barrageViewDataSource.mineItemModelsArray removeObjectAtIndex:0];
+        
+        // 返回，不用再去发射别人发的弹幕
+        return;
+        
+    }
     
-//    NSInteger section = 0;
-//    NSInteger item = 0;
-//    for (int i=0; i<self.magazine.count; i++) {
-//        item = i / self.maxRows;
-//        section = i % self.maxRows;
-//    }
+    
+    // 这里查找同section 下一个cell 有个问题,如果下一个cell不在这个magazine要怎么处理
+    // 2,取当前弹道sectionLastedEmitIndexPathDic ,并由它算出nextIndexPath
+    NSInteger item = 0;
+    NSInteger section = cell.itemModel.indexPath.section;
+    NSIndexPath *lastedIndexPath = self.sectionLastedEmitIndexPathDic[[NSString stringWithFormat:@"%zd",section]];
+    if (lastedIndexPath.item == -1) { // 该弹道从未发射过item
+        item = 0;
+    }else {
+        item = lastedIndexPath.item + 1;
+    }
+    NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+    
+    // 根据nextIndexPath，获取nextItemModel
+    ZGBarrageItemModel *nextItemModel = [self.barrageViewDataSource getItemModelWithIndexPath:nextIndexPath];
+    
+    if (!nextItemModel) { // 为空，说明没有此itemModel
+        ;
+    }else {
+        
+        // 有，根据itemModel，获取cell,然后，立即发射
+        ZGBarrageCell *cell = [self.dataSource emitter:self cellForItemAtIndexPath:nextIndexPath itemModel:nextItemModel];
+        cell.itemModel.indexPath = nextIndexPath;
+        [cell startAnimation];
+        cell.itemModel.isEmit = YES;
+        // 发射后，设置标志位
+        [self.canEmitFlagDic setValue:@(NO) forKey:[NSString stringWithFormat:@"%zd",section]];
+        [self.sectionLastedEmitIndexPathDic setObject:nextIndexPath forKey:[NSString stringWithFormat:@"%zd",section]];
+    }
+
+    
+    
+    
+    
+    return;
+    
+    // 第一种方案
+    //    NSInteger section = 0;
+    //    NSInteger item = 0;
+    //    for (int i=0; i<self.magazine.count; i++) {
+    //        item = i / self.maxRows;
+    //        section = i % self.maxRows;
+    //    }
     
     // 判断，同行（section）的下一个，有没有超出magazine
-    NSInteger item = cell.itemModel.indexPath.item;
-    NSInteger section = cell.itemModel.indexPath.section;
+    //    NSInteger item = cell.itemModel.indexPath.item;
+    //    NSInteger section = cell.itemModel.indexPath.section;
     
+    // 这里查找同section 下一个cell 有个问题,如果下一个cell不在这个magazine要怎么处理
     if ( ((item + 1) * self.maxRows + section) >= self.magazine.startIndex  && ( (item + 1) * self.maxRows + section) <  (self.magazine.startIndex + self.magazine.dataArray.count) ) {
+        
+        
+        
         // 没有超出magazine
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:(item+1) inSection:section];
         ZGBarrageItemModel *itemModel = self.magazine.dataArray[( (item + 1) * self.maxRows + section) -  self.magazine.startIndex];
@@ -187,6 +344,14 @@
             // 对新的magazine，重新一轮发射
             [self emitStart];
         }
+    }
+}
+
+
+- (void)resetSectionLastedIndexPathDic
+{
+    for (int i=0; i<self.maxRows; i++) {
+        [self.sectionLastedEmitIndexPathDic setObject:[NSIndexPath indexPathForItem:-1 inSection:i] forKey:[NSString stringWithFormat:@"%zd",i]];
     }
 }
 

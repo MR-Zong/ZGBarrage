@@ -40,6 +40,12 @@
     return self;
 }
 
+- (void)addMineItemModel:(ZGBarrageItemModel *)mineItemModel
+{
+    
+    [self.dataSource addMineItemModel:mineItemModel];
+}
+
 - (void)addDataArray:(NSArray *)dataArray
 {
     [self.dataSource addMagazine:dataArray];
@@ -67,6 +73,14 @@
 {
     return self.layout.maxRows;
 }
+
+- (void)sendMineItemModelsArray:(NSMutableArray *)mineItemModelsArray
+{
+    // 立即发射，自己发的弹幕
+    [self.emitter sendMineItemModelsArray:mineItemModelsArray];
+    
+}
+
 
 - (void)reloadDataWithMagazine:(ZGMagazine *)magazine
 {

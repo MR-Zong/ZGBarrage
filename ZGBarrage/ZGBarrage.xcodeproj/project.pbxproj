@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF176A711D5969250060DAE6 /* ZGMagazine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF176A701D5969250060DAE6 /* ZGMagazine.m */; };
+		EF265DC91D60508700EC0D00 /* Zong.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF265DC81D60508700EC0D00 /* Zong.jpg */; settings = {ASSET_TAGS = (); }; };
 		EF2C5EE81D5865E300049AD7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EE71D5865E300049AD7 /* main.m */; };
 		EF2C5EEB1D5865E300049AD7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EEA1D5865E300049AD7 /* AppDelegate.m */; };
 		EF2C5EEE1D5865E300049AD7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EED1D5865E300049AD7 /* ViewController.m */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		EF176A6F1D5969250060DAE6 /* ZGMagazine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGMagazine.h; sourceTree = "<group>"; };
 		EF176A701D5969250060DAE6 /* ZGMagazine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGMagazine.m; sourceTree = "<group>"; };
+		EF265DC81D60508700EC0D00 /* Zong.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Zong.jpg; sourceTree = "<group>"; };
 		EF2C5EE31D5865E200049AD7 /* ZGBarrage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZGBarrage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF2C5EE71D5865E300049AD7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF2C5EE91D5865E300049AD7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		EF2C5EE61D5865E300049AD7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EF265DC81D60508700EC0D00 /* Zong.jpg */,
 				EF4708C91D5B331E00A5DE64 /* 弹幕效果展示.gif */,
 				EF2C5EE71D5865E300049AD7 /* main.m */,
 			);
@@ -322,6 +325,7 @@
 			files = (
 				EF2C5EF61D5865E300049AD7 /* LaunchScreen.storyboard in Resources */,
 				EF2C5EF31D5865E300049AD7 /* Assets.xcassets in Resources */,
+				EF265DC91D60508700EC0D00 /* Zong.jpg in Resources */,
 				EF2C5EF11D5865E300049AD7 /* Main.storyboard in Resources */,
 				EF4708CA1D5B331E00A5DE64 /* 弹幕效果展示.gif in Resources */,
 			);
