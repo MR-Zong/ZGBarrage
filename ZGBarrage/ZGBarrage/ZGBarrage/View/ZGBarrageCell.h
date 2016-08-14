@@ -29,14 +29,13 @@ extern NSString * const ZGBarrageCellReusableIdentifier;
 
 @interface ZGBarrageCell : UIView
 
-@property (nonatomic) CGFloat minimumInteritemSpacing;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic) CGFloat minimumInteritemSpacing;
 @property (nonatomic, strong) ZGBarrageItemModel *itemModel;
-
 @property (nonatomic, readonly, copy) NSString* identifier;
-- (instancetype)initWithReusableIdentifier:(NSString*)identifer;
 
+- (instancetype)initWithReusableIdentifier:(NSString*)identifer;
 
 - (void)startAnimation;
 

@@ -33,7 +33,6 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 {
     self.imageView = [[UIImageView alloc] init];
     self.imageView.image = [UIImage imageNamed:@"Zong.jpg"];
-    self.imageView.backgroundColor = [UIColor greenColor];
     self.imageView.userInteractionEnabled = YES;
     [self.imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressImageView:)]];
     [self addSubview:self.imageView];

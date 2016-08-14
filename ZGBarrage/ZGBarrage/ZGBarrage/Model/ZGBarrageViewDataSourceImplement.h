@@ -13,9 +13,11 @@
 
 @interface ZGBarrageViewDataSourceImplement : NSObject <ZGBarrageViewDataSource>
 
-@property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic, assign,readonly) NSInteger currentIndex;
 
-@property (nonatomic, assign) NSInteger maxCount;
+@property (nonatomic, assign,readonly) NSInteger maxCount;
+
+@property (nonatomic, assign,readonly) NSInteger totalCount;
 
 // 用于缓存，我自己发的弹幕
 @property(nonatomic, strong) NSMutableArray *mineItemModelsArray;
@@ -39,6 +41,14 @@
  * magazine:中文意思 -- 弹匣
  */
 - (void)addMagazine:(NSArray *)magazine;
+
+/**
+ * 重置dsI
+ * 1,将会清空所有缓存数据
+ * 2,所有的标志位都会设置回初始状态
+ * 3，已经在飘的弹幕，不会受到影响
+ */
+- (void)reset;
 
 - (void)emitCompleteWithMagazine:(ZGMagazine *)magazine;
 

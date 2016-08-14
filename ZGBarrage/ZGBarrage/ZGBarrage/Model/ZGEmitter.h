@@ -29,7 +29,15 @@
 
 @property (nonatomic, strong) ZGMagazine *magazine;
 
+/**
+ * 重置当前弹道IndexPath
+ */
 - (void)resetSectionLastedIndexPathDic;
+
+/**
+ * 重置当前弹道是否可以发射标志位
+ */
+- (void)resetCanEmitFlagDic;
 
 
 /**
@@ -54,6 +62,16 @@
  * 发射一个barrageCell
  */
 - (void)emitWithBarrageCell:(ZGBarrageCell *)cell;
+
+/**
+ * 重置所有标志位，记住是所有
+ */
+- (void)destroy;
+
+/**
+ * 重置emitter
+ */
+- (void)reset;
 
 
 @property (nonatomic, weak) ZGBarrageViewDataSourceImplement *barrageViewDataSource;

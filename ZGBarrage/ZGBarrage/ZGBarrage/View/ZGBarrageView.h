@@ -44,6 +44,23 @@
 - (void)reloadDataWithMagazine:(ZGMagazine *)magazine;
 
 /**
+ * 强制重置
+ * 1,重置整个barrageView
+ * 2,将会清空所有缓存数据
+ * 3,所有的标志位都会设置回初始状态
+ * 4，已经在飘的弹幕，也会被移除
+ */
+- (void)destroy;
+
+/**
+ * 重置整个barrageView
+ * 1,将会清空所有缓存数据
+ * 2,所有的标志位都会设置回初始状态
+ * 3，已经在飘的弹幕，不会受到影响
+ */
+- (void)reset;
+
+/**
  * 发射自己发的弹幕
  */
 - (void)sendMineItemModelsArray:(NSMutableArray *)mineItemModelsArray;
@@ -53,6 +70,11 @@
  */
 - (instancetype)initWithFrame:(CGRect)frame barrageLayout:(ZGBarrageLayout *)layout;
 
+
+/**
+ * 获取缓存数据总数
+ */
+- (NSInteger)totalCountOfItemModels;
 
 /***
  * 从缓存池获取cell

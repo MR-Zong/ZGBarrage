@@ -17,9 +17,6 @@
 /**能否发射标志*/
 @property (nonatomic, strong) NSMutableDictionary *canEmitFlagDic;
 
-/**该section是否有弹幕在飘*/
-@property (nonatomic, strong) NSMutableDictionary *hasItemInSectionFlagDic;
-
 /**弹道当前indexPath*/
 @property (nonatomic, strong) NSMutableDictionary *sectionLastedEmitIndexPathDic;
 
@@ -47,15 +44,6 @@
     for (int i=0; i<self.maxRows; i++) {
         [self.sectionLastedEmitIndexPathDic setObject:[NSIndexPath indexPathForItem:-1 inSection:i] forKey:[NSString stringWithFormat:@"%zd",i]];
     }
-
-    
-    // 初始化每行是否已经有item的标志
-    self.hasItemInSectionFlagDic = [NSMutableDictionary dictionary];
-    for (int i=0; i<self.maxRows; i++) {
-        [self.hasItemInSectionFlagDic setObject:@(NO) forKey:[NSString stringWithFormat:@"%zd",i]];
-    }
-
-    
 
 }
 
@@ -348,11 +336,34 @@
 }
 
 
+
 - (void)resetSectionLastedIndexPathDic
 {
     for (int i=0; i<self.maxRows; i++) {
         [self.sectionLastedEmitIndexPathDic setObject:[NSIndexPath indexPathForItem:-1 inSection:i] forKey:[NSString stringWithFormat:@"%zd",i]];
     }
+}
+
+- (void)resetCanEmitFlagDic
+{
+    for (int i=0; i<self.maxRows; i++) {
+        [self.canEmitFlagDic setObject:@(YES) forKey:[NSString stringWithFormat:@"%zd",i]];
+    }
+}
+
+- (void)reset
+{
+     // 1,重置当前弹道IndexPath
+    [self resetSectionLastedIndexPathDic];
+}
+
+- (void)destroy
+{
+    // 1,重置当前弹道IndexPath
+    [self resetSectionLastedIndexPathDic];
+
+    // 2,重置当前弹道是否可以发射标志位
+    [self resetCanEmitFlagDic];
 }
 
 #pragma mark - ZGBarrageCellAnimateDelegate2

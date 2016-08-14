@@ -83,6 +83,22 @@
     [btn4 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn4];
 
+    UIButton *btn5 = [UIButton buttonWithType:UIButtonTypeSystem];
+    btn5.backgroundColor = [UIColor orangeColor];
+    [btn5 setTitle:@"reset" forState:UIControlStateNormal];
+    btn5.tag = 5;
+    btn5.frame = CGRectMake(CGRectGetMaxX(btn4.frame) + 20, btn4.frame.origin.y, 80, 40);
+    [btn5 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn5];
+
+    UIButton *btn6 = [UIButton buttonWithType:UIButtonTypeSystem];
+    btn6.backgroundColor = [UIColor redColor];
+    [btn6 setTitle:@"destroy" forState:UIControlStateNormal];
+    btn6.tag = 6;
+    btn6.frame = CGRectMake(CGRectGetMaxX(btn5.frame) + 20, btn4.frame.origin.y, 80, 40);
+    [btn6 addTarget:self action:@selector(didBtnPress:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn6];
+
 }
 
 
@@ -91,7 +107,13 @@
     if (btn.tag == 4) { // 添加自己的弹幕
         [self barrageViewAddMineItemModel];
         
-    }else { // 添加别人的弹幕
+    }else if(btn.tag == 5) {
+        [self.barrageView reset];
+    
+    }else if(btn.tag == 6) {
+        [self.barrageView destroy];
+        
+    }else{ // 添加别人的弹幕
         
         [self barrageViewAddDataArrayWithSize:btn.tag];
     }

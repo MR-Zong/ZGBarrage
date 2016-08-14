@@ -95,6 +95,31 @@
   
 }
 
+- (void)destroy
+{
+    // 1,清除已经在飘的弹幕
+    for (UIView *subView in self.subviews) {
+        [subView removeFromSuperview];
+    }
+    
+    // 2,清理缓存
+    [self.dataSource reset];
+    
+    // 3,重置emitter
+    [self.emitter destroy];
+}
+
+- (void)reset
+{
+    [self.dataSource reset];
+    [self.emitter reset];
+}
+
+- (NSInteger)totalCountOfItemModels
+{
+    return self.dataSource.totalCount;
+}
+
 #pragma mark - ZGBarrageCellAnimateDelegate
 - (void)animationDidStopWithCell:(ZGBarrageCell *)cell
 {
