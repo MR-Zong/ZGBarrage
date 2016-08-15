@@ -53,7 +53,6 @@
     // 必须上锁
     ZGMagazine *tmpMagazine = [[ZGMagazine alloc] init];
     tmpMagazine.startIndex = self.currentIndex; // 切记
-    NSLog(@"tmpMagazine.startIndex %zd",tmpMagazine.startIndex);
     tmpMagazine.dataArray = magazine;
     tmpMagazine.leaveCount = magazine.count;
     tmpMagazine.firstStageOfLeaveCount = tmpMagazine.leaveCount;
@@ -74,7 +73,6 @@
 {
     if (index < self.magazinesArray.count) {
         // 必须上锁
-        // 移除就要减去totalCount
         _totalCount -= ((ZGMagazine *)self.magazinesArray[index]).dataArray.count;
         
         [self.magazinesArray removeObjectAtIndex:index];
@@ -89,11 +87,8 @@
 
 - (void)reset
 {
-    // 1,将会清空所有缓存数据
     self.magazinesArray = nil;
     self.magazinesArray = [NSMutableArray array];
-    
-    // 2,所有的标志位都会设置回初始状态
     _currentIndex = 0;
 }
 
@@ -107,23 +102,10 @@
 
 - (ZGBarrageItemModel *)getItemModelWithIndexPath:(NSIndexPath *)indexPath
 {
-    // 根据indexPath，来获取
-    
-    //    NSInteger section = 0;
-    //    NSInteger item = 0;
-    //    for (int i=0; i<self.magazine.count; i++) {
-    //        item = i / self.maxRows;
-    //        section = i % self.maxRows;
-    //    }
-
-    // 1，把indexPath 转换 一维index
     NSInteger maxRows = [self.barrageView getMaxRows];
     NSInteger normalIndex = indexPath.item * maxRows + indexPath.section;
-    
-    // 2,必须注意indexPath必须是有效的
-    if (normalIndex >= 0 && normalIndex < self.maxCount) { // 有效
+    if (normalIndex >= 0 && normalIndex < self.maxCount) {
         
-        //3,一维index 转换成 在哪个magazine的第几个index
         NSInteger indexOfMagazine = 0;
         NSInteger indexInMagazine = 0;
         while ((int)indexOfMagazine < (int)self.magazinesArray.count) {
@@ -139,7 +121,6 @@
         }
         
         if (indexOfMagazine >= self.magazinesArray.count) {
-            // 说明这个indexPath的itemModel所在的magazine已经由于全部发射完成，而被移除
             return nil;
         }
         
@@ -157,18 +138,12 @@
  */
 - (void)manageMagazinesArrayWithItemModel:(ZGBarrageItemModel *)itemModel
 {
-    // 检查是否是这个magazine已经显示完
     if (self.magazinesArray.count > 0) {
-        // 根据itemModel.indexPath 算出该itemModel属于哪个magazine
-        // 1，把indexPath 转换 一维index
         NSIndexPath *indexPath = itemModel.indexPath;
         NSInteger maxRows = [self.barrageView getMaxRows];
         NSInteger normalIndex = indexPath.item * maxRows + indexPath.section;
         
-        // 2,必须注意indexPath必须是有效的
-        if (normalIndex >= 0 && normalIndex < self.maxCount) { // 有效
-            
-            //3,一维index 转换成 在哪个magazine的第几个index
+        if (normalIndex >= 0 && normalIndex < self.maxCount) {
             NSInteger indexOfMagazine = 0;
             NSInteger indexInMagazine = 0;
             while ((int)indexOfMagazine < (int)self.magazinesArray.count) {
@@ -184,14 +159,12 @@
             }
             
             if (indexOfMagazine >= self.magazinesArray.count) {
-                // 说明这个indexPath的itemModel所在的magazine已经由于全部发射完成，而被移除
                 return ;
             }
             
             ZGMagazine *magazine = self.magazinesArray[indexOfMagazine];
-            // 对magazine.leaveCount 减一
             magazine.leaveCount--;
-            if ( magazine && magazine.leaveCount <= 0) { // 如果显示完，就要移除这个magazine
+            if ( magazine && magazine.leaveCount <= 0) {
                 [self removeMagazineWithIndex:indexOfMagazine];
             }
         }
@@ -218,11 +191,7 @@
 #pragma mark - emitter 发射完一个magazine
 - (void)emitCompleteWithMagazine:(ZGMagazine *)magazine
 {
-    // 不能移除，因为这里才第一阶段的完成而已
-    // 要第二阶段动画全部完成才能移除magazine
-    // 所以这个方法就提供一下，以后有需要拓展
-    // 移除发射完的magazine
-//    [self removeMagazineWithIndex:magazine.indexInContainer];
+    // 这个方法就提供一下，以后有需要拓展
 }
 
 @end

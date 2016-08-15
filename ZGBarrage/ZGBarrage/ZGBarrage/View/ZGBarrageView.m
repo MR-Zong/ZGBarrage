@@ -76,36 +76,21 @@
 
 - (void)sendMineItemModelsArray:(NSMutableArray *)mineItemModelsArray
 {
-    // 立即发射，自己发的弹幕
     [self.emitter sendMineItemModelsArray:mineItemModelsArray];
-    
 }
 
 
 - (void)reloadDataWithMagazine:(ZGMagazine *)magazine
 {
-//    // 判断emitter里面是不是正在发射
-//    if (self.emitter.magazine.firstStageOfLeaveCount > 0) {
-//        // 正在发射就不用启动发射器了
-//        return;
-//    }
-
-    // 发射器开始发射
     [_emitter startWithMagazine:magazine];
-  
 }
 
 - (void)destroy
 {
-    // 1,清除已经在飘的弹幕
     for (UIView *subView in self.subviews) {
         [subView removeFromSuperview];
     }
-    
-    // 2,清理缓存
     [self.dataSource reset];
-    
-    // 3,重置emitter
     [self.emitter destroy];
 }
 
@@ -123,14 +108,8 @@
 #pragma mark - ZGBarrageCellAnimateDelegate
 - (void)animationDidStopWithCell:(ZGBarrageCell *)cell
 {
-    // 随着动画结束，该cell已经离开屏幕!!
-    // 加入cell缓存池
     [self.reusableCachePool setValue:cell forKey:ZGBarrageCellReusableIdentifier];
-    
-    // dataSource 操作
     [self.dataSource manageMagazinesArrayWithItemModel:cell.itemModel];
-    
-    
 }
 
 #pragma mark - ZGEmitterDataSource
@@ -146,15 +125,9 @@
 
 - (ZGBarrageCell *)emitter:(ZGEmitter *)emitter cellForItemAtIndexPath:(NSIndexPath *)indexPath itemModel:(ZGBarrageItemModel *)itemModel
 {
-    
-//    NSLog(@"item %zd - section %zd",indexPath.item,indexPath.section);
-    // 1,先拿到布局信息
     UICollectionViewLayoutAttributes *layoutAttribute = [self.layout layoutAttributesForItemAtIndexPath:indexPath itemModel:itemModel];
-    
-    // 2,拿到cell视图
     ZGBarrageCell *cell = [self.dataSource barrageView:self cellForItemAtIndexPath:indexPath];
     cell.frame = layoutAttribute.frame;
-    
     cell.imageView.frame = CGRectMake(0, 0, 45, 45);
     cell.textLabel.frame = CGRectMake(45, 0, cell.bounds.size.width - 45, cell.bounds.size.height);
     cell.animateDelegate = self;
@@ -163,7 +136,6 @@
     cell.itemModel = itemModel;
     cell.textLabel.text = itemModel.text;
     
-    // 3,addSubview,并设置布局信息
     [self addSubview:cell];
     
     return cell;
