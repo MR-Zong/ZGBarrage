@@ -11,6 +11,7 @@
 #import "ZGBarrageFlowLayout.h"
 #import "ZGBarrageItemModel.h"
 #import "ZGEmitter.h"
+#import "ZGBarrageViewDelegate.h"
 
 @class ZGMagazine;
 
@@ -20,6 +21,7 @@
 
 @interface ZGBarrageView : UIView
 
+@property (nonatomic, weak) id <ZGBarrageViewDelegate> delegate;
 
 @property (nonatomic, strong) ZGEmitter *emitter;
 

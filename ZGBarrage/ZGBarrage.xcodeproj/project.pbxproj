@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF176A711D5969250060DAE6 /* ZGMagazine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF176A701D5969250060DAE6 /* ZGMagazine.m */; };
-		EF265DC91D60508700EC0D00 /* Zong.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF265DC81D60508700EC0D00 /* Zong.jpg */; settings = {ASSET_TAGS = (); }; };
+		EF265DC91D60508700EC0D00 /* Zong.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF265DC81D60508700EC0D00 /* Zong.jpg */; };
 		EF2C5EE81D5865E300049AD7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EE71D5865E300049AD7 /* main.m */; };
 		EF2C5EEB1D5865E300049AD7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EEA1D5865E300049AD7 /* AppDelegate.m */; };
 		EF2C5EEE1D5865E300049AD7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2C5EED1D5865E300049AD7 /* ViewController.m */; };
@@ -80,6 +80,7 @@
 		EF4708C91D5B331E00A5DE64 /* 弹幕效果展示.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "弹幕效果展示.gif"; sourceTree = "<group>"; };
 		EF7360C71D59BA4B00967D6F /* ZGEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGEmitter.h; sourceTree = "<group>"; };
 		EF7360C81D59BA4B00967D6F /* ZGEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGEmitter.m; sourceTree = "<group>"; };
+		EFA87EE71D62FCDE005641CA /* ZGBarrageViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGBarrageViewDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +206,7 @@
 				EF35FC011D59783900288C3A /* ZGBarrageFlowLayout.m */,
 				EF7360C71D59BA4B00967D6F /* ZGEmitter.h */,
 				EF7360C81D59BA4B00967D6F /* ZGEmitter.m */,
+				EFA87EE71D62FCDE005641CA /* ZGBarrageViewDelegate.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";

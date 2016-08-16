@@ -105,6 +105,16 @@
     return self.dataSource.totalCount;
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *tmpView = [super hitTest:point withEvent:event];
+    if ( tmpView == self) {
+        return nil;
+    }else {
+        return tmpView;
+    }
+}
+
 #pragma mark - ZGBarrageCellAnimateDelegate
 - (void)animationDidStopWithCell:(ZGBarrageCell *)cell
 {
@@ -134,7 +144,6 @@
     cell.animateDelegate2 = self.emitter;
     cell.minimumInteritemSpacing = ((ZGBarrageFlowLayout *)self.layout).minimumInteritemSpacing;
     cell.itemModel = itemModel;
-    cell.textLabel.text = itemModel.text;
     
     [self addSubview:cell];
     

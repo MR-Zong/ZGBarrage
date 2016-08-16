@@ -12,6 +12,8 @@
 
 @class ZGBarrageItemModel;
 
+@class ZGBarrageView;
+
 @protocol ZGBarrageCellAnimateDelegate <NSObject>
 
 - (void)animationDidStopWithCell:(ZGBarrageCell *)cell;
@@ -34,7 +36,7 @@ extern NSString * const ZGBarrageCellReusableIdentifier;
 @property (nonatomic) CGFloat minimumInteritemSpacing;
 @property (nonatomic, strong) ZGBarrageItemModel *itemModel;
 @property (nonatomic, readonly, copy) NSString* identifier;
-
+@property (nonatomic, weak) ZGBarrageView *barrageView;
 - (instancetype)initWithReusableIdentifier:(NSString*)identifer;
 
 - (void)startAnimation;

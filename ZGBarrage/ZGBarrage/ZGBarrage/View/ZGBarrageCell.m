@@ -8,6 +8,7 @@
 
 #import "ZGBarrageCell.h"
 #import "ZGBarrageView.h"
+#import "ZGBarrageView.h"
 
 #define Velocity 30.0
 
@@ -30,7 +31,6 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 - (void)setupViews
 {
     self.imageView = [[UIImageView alloc] init];
-    self.imageView.image = [UIImage imageNamed:@"Zong.jpg"];
     self.imageView.userInteractionEnabled = YES;
     [self.imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressImageView:)]];
     [self addSubview:self.imageView];
@@ -89,11 +89,25 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
 - (void)didPressImageView:(UITapGestureRecognizer *)tap
 {
     NSLog(@"didPressImageView");
+    if (self.barrageView.delegate && [self.barrageView.delegate respondsToSelector:@selector(barrageView:didSelectItemAtIndexPath:itemModel:)]) {
+        [self.barrageView.delegate barrageView:self.barrageView didSelectItemAtIndexPath:self.itemModel.indexPath itemModel:self.itemModel];
+    }
+    
+    if (self.barrageView.delegate && [self.barrageView.delegate respondsToSelector:@selector(barrageView:didSelectItemImageViewWithItemModel:)]) {
+        [self.barrageView.delegate barrageView:self.barrageView didSelectItemImageViewWithItemModel:self.itemModel];
+    }
 }
 
 - (void)didPressTextLabel:(UITapGestureRecognizer *)tap
 {
     NSLog(@"didPressTextLabel");
+    if (self.barrageView.delegate && [self.barrageView.delegate respondsToSelector:@selector(barrageView:didSelectItemAtIndexPath:itemModel:)]) {
+        [self.barrageView.delegate barrageView:self.barrageView didSelectItemAtIndexPath:self.itemModel.indexPath itemModel:self.itemModel];
+    }
+    
+    if (self.barrageView.delegate && [self.barrageView.delegate respondsToSelector:@selector(barrageView:didSelectItemTextLabelWithItemModel:)]) {
+        [self.barrageView.delegate barrageView:self.barrageView didSelectItemTextLabelWithItemModel:self.itemModel];
+    }
 }
 
 - (BOOL)pointInside:(CGPoint)point frame:(CGRect)frame
@@ -114,6 +128,13 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
     return CGPointMake(newX, newY);
 }
 
-
+#pragma mark - setter
+- (void)setItemModel:(ZGBarrageItemModel *)itemModel
+{
+    _itemModel = itemModel;
+    
+    self.imageView.image = [UIImage imageNamed:@"Zong.jpg"];
+    self.textLabel.text = itemModel.text;
+}
 
 @end
