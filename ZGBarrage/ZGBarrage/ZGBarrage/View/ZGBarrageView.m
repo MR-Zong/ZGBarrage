@@ -36,8 +36,35 @@
         _emitter.dataSource = self;
         _emitter.barrageViewDataSource = _dataSource;
         [_emitter prepare];
+        
+        [self observNotifications];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    [super willMoveToSuperview:newSuperview];
+    
+    [self destroy];
+}
+
+- (void)removeFromSuperview
+{
+    [self destroy];
+    
+    [super removeFromSuperview];
+}
+
+- (void)observNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAppWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAppEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 - (void)addMineItemModel:(ZGBarrageItemModel *)mineItemModel
@@ -151,5 +178,15 @@
     
 }
 
+#pragma mark - observe notification
+- (void)didAppWillEnterForeground:(NSNotification *)note
+{
+    [self destroy];
+}
+
+- (void)didAppEnterBackground:(NSNotification *)note
+{
+    [self destroy];
+}
 
 @end
