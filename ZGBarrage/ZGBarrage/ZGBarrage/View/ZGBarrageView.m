@@ -54,12 +54,6 @@
     [self destroy];
 }
 
-- (void)removeFromSuperview
-{
-    [self destroy];
-    
-    [super removeFromSuperview];
-}
 
 - (void)observNotifications
 {
