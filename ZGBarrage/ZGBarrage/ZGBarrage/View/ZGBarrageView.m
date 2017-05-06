@@ -37,15 +37,15 @@
         _emitter.barrageViewDataSource = _dataSource;
         [_emitter prepare];
         
-        [self observNotifications];
+//        [self observNotifications];
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void)dealloc
+//{
+////    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {

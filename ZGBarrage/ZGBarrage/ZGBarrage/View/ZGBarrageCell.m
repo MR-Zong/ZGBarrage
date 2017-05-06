@@ -51,8 +51,8 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
         self.frame = CGRectMake(toX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
     } completion:^(BOOL finished) {
         
-        if (finished == YES) {
-            
+//        if (finished == YES) {
+        
             if (self.animateDelegate2 && [self.animateDelegate2 respondsToSelector:@selector(animation2DidStopWithCell:)]) {
                 [self.animateDelegate2 animation2DidStopWithCell:self];
             }
@@ -60,16 +60,16 @@ NSString * const ZGBarrageCellReusableIdentifier = @"ZGBarrageCellReusableIdenti
                 self.frame = CGRectMake(-self.bounds.size.width, self.frame.origin.y, self.bounds.size.width, self.bounds.size.height);
                 
             } completion:^(BOOL finished) {
-                if (finished == YES) {
+//                if (finished == YES) {
                     if (self.animateDelegate && [self.animateDelegate respondsToSelector:@selector(animationDidStopWithCell:)]) {
                         [self.animateDelegate animationDidStopWithCell:self];
                         
                         [self removeFromSuperview];
                     }
-                }
+//                }
                 
             }];
-        }
+//        }
     }];
 
     
